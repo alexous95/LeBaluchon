@@ -67,6 +67,8 @@ class ChangeRateController: UIViewController {
     
 }
 
+// MARK: - EXTENSIONS
+
 extension ChangeRateController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
