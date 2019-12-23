@@ -57,17 +57,15 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ew7-3z-e1Y">
                                                     <rect key="frame" x="20" y="17" width="38" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N6E-b0-yYI">
                                                     <rect key="frame" x="343.5" y="17" width="50.5" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -75,26 +73,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PUb-Nt-iAa">
-                                <rect key="frame" x="141.5" y="602" width="131" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="8Di-x7-WTQ"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="8Di-x7-WTQ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="8Di-x7-WTQ"/>
-                                    </mask>
-                                </variation>
-                            </segmentedControl>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Adk-dc-zc8">
                                 <rect key="frame" x="297" y="90" width="20" height="20"/>
                                 <constraints>
@@ -120,9 +98,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hml-k1-Yyn"/>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="PUb-Nt-iAa"/>
-                            </mask>
                             <mask key="constraints">
                                 <exclude reference="Jic-Fp-2jc"/>
                                 <exclude reference="UhW-he-wDu"/>
@@ -135,9 +110,6 @@
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
-                            <mask key="subviews">
-                                <exclude reference="PUb-Nt-iAa"/>
-                            </mask>
                             <mask key="constraints">
                                 <include reference="Jic-Fp-2jc"/>
                                 <include reference="UhW-he-wDu"/>

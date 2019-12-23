@@ -24,11 +24,9 @@ class ChangeRateController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+    
+        setupDelegate()
         activityWheel.isHidden = true
-        amountTF.delegate = self
     }
     
     // MARK: - ACTIONS
@@ -63,6 +61,12 @@ class ChangeRateController: UIViewController {
     private func updateInterface(isHidden: Bool) {
         activityWheel.isHidden = isHidden
         convertButton.isHidden = !isHidden
+    }
+    
+    private func setupDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        amountTF.delegate = self
     }
     
 }
