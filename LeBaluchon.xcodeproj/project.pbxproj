@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */; };
+		FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */; };
 		FAB1B79C239C191D00243B7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1B79B239C191D00243B7E /* AppDelegate.swift */; };
 		FAB1B79E239C191D00243B7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1B79D239C191D00243B7E /* SceneDelegate.swift */; };
 		FAB1B7A3239C191D00243B7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB1B7A1239C191D00243B7E /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUtilities.swift; sourceTree = "<group>"; };
+		FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTableViewCell.swift; sourceTree = "<group>"; };
 		FAB1B798239C191D00243B7E /* LeBaluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeBaluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB1B79B239C191D00243B7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB1B79D239C191D00243B7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				FAB1B7A1239C191D00243B7E /* Main.storyboard */,
 				FAB1B7A9239C191F00243B7E /* LaunchScreen.storyboard */,
+				FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				FAB7CBB5239F93D900B4F47F /* ExchangeAPI.swift in Sources */,
 				FAB7CBB3239F8E6800B4F47F /* WeatherController.swift in Sources */,
 				FAE9FEC123A8DD8900F7F76E /* Exchange.swift in Sources */,
+				FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */,
 				FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -26,11 +26,13 @@ class ChangeRateController: UIViewController {
         super.viewDidLoad()
     
         setupDelegate()
+        roundedUI()
         activityWheel.isHidden = true
     }
     
     // MARK: - ACTIONS
     
+    /// This action is used to retrieve the rates from the API
     @IBAction func getRates() {
         updateInterface(isHidden: convertButton.isHidden)
         activityWheel.startAnimating()
@@ -69,6 +71,11 @@ class ChangeRateController: UIViewController {
         amountTF.delegate = self
     }
     
+    private func roundedUI() {
+        convertButton.layer.cornerRadius = 15
+        tableView.layer.cornerRadius = 15
+    }
+    
 }
 
 // MARK: - EXTENSIONS
@@ -91,12 +98,12 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "changeCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "changeCell", for: indexPath) as? ExchangeTableViewCell else {
+            return UITableViewCell()
+        }
         
         // Get current keys
         guard let exchangeRates = exchangeRates?.rates else {
-            cell.textLabel?.text = ""
-            cell.detailTextLabel?.text = ""
             return cell
         }
         var arrayKey = Array(exchangeRates.keys)
@@ -105,9 +112,8 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
         let amount = getAmount()
         guard let exchangeRate = exchangeRates[currentKey] else { return cell }
         
-        cell.textLabel?.text = currentKey
-        cell.detailTextLabel?.text = String(format: "%.2F", (exchangeRate * amount) )
-        
+        cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)) )
+    
         return cell
     }
     
