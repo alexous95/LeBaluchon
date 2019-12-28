@@ -43,7 +43,7 @@ class ChangeRateController: UIViewController {
                 self.updateInterface(isHidden: self.convertButton.isHidden)
                 self.activityWheel.stopAnimating()
             } else {
-                print("erreur ")
+                print("error")
             }
         }
     }
@@ -52,7 +52,6 @@ class ChangeRateController: UIViewController {
     private func getAmount() -> Double {
         if let amountString = amountTF.text {
             guard let amount = Double(amountString) else {
-                print("on a pas rentrer un nombre")
                 return -1.0
             }
             return amount

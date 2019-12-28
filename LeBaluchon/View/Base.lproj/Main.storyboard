@@ -21,7 +21,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="llg-Cg-E7D">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="llg-Cg-E7D">
                                 <rect key="frame" x="0.0" y="197" width="414" height="616"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -143,9 +143,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOx-Jn-Rc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246.37681159420291" y="-32.142857142857139"/>
+            <point key="canvasLocation" x="-246" y="-1381"/>
         </scene>
-        <!--Item 1-->
+        <!--Weather-->
+        <scene sceneID="3Kf-wD-Orp">
+            <objects>
+                <viewController id="sLq-s4-J7D" customClass="WeatherController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RCF-fN-kgV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="cfy-Jj-QLR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Weather" id="V4q-vR-w7l"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwI-hO-x33" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-246" y="677"/>
+        </scene>
+        <!--Translate-->
         <scene sceneID="xaD-Ck-Qfb">
             <objects>
                 <viewController id="VMQ-BP-CKp" customClass="TranslateController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -155,11 +171,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6b7-7P-KaS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="bN3-0C-2WW"/>
+                    <tabBarItem key="tabBarItem" title="Translate" id="bN3-0C-2WW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r7-oo-yt2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246.37681159420291" y="-679.01785714285711"/>
+            <point key="canvasLocation" x="-246" y="-356"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oMD-1H-nMf">
@@ -171,8 +187,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="VMQ-BP-CKp" kind="relationship" relationship="viewControllers" id="ImO-D2-nIe"/>
                         <segue destination="tje-Ao-AgT" kind="relationship" relationship="viewControllers" id="Kc4-n6-2wv"/>
+                        <segue destination="VMQ-BP-CKp" kind="relationship" relationship="viewControllers" id="ImO-D2-nIe"/>
+                        <segue destination="sLq-s4-J7D" kind="relationship" relationship="viewControllers" id="iyu-Tl-t1b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NCx-5P-VG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
