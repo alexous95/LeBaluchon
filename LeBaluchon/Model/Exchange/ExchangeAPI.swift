@@ -17,6 +17,7 @@ final class ExchangeAPI {
     private let exchangeUrl = URL(string: Fixer.fixerUrl)!
     
     /// Create a request from our URL
+    /// - Returns: A URLRequest from our Url and set http method to "GET"
     private func createExchangeRequest() -> URLRequest {
         var request = URLRequest(url: exchangeUrl)
         request.httpMethod = "GET"

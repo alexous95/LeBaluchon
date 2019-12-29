@@ -36,6 +36,8 @@ struct OpenWeatherURL {
     
     static private let appID = "&APPID=\(APIKeys.OpenWeatherKey)"
     
+    static let imgAdress = "http://openweathermap.org/img/wn/"
+    
     static var url: String {
         return endpoint + parameters + appID
     }

@@ -11,7 +11,7 @@ struct OpenWeather: Codable {
     let wind: Wind
     let snow: Snow?
     let rain: Rain?
-    let clouds: Clouds
+    let clouds: Clouds?
     let dt: Int
     let sys: Sys
     let timezone: Date
@@ -21,21 +21,23 @@ struct OpenWeather: Codable {
 }
 
 // MARK: - Clouds
+
 struct Clouds: Codable {
     let all: Int
 }
 
 // MARK: - Coord
+
 struct Coord: Codable {
     let lon: Double
     let lat: Double
 }
 
 // MARK: - Main
+
 struct Main: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, humidity: Int
-    //let sea_level, grnd_level: Int?
     
     enum CodingKeys: String, CodingKey {
         case temp
@@ -43,12 +45,11 @@ struct Main: Codable {
         case tempMin = "temp_min"
         case tempMax = "temp_max"
         case pressure, humidity
-        //case seaLevel = "sea_level"
-        //case grndLevel = "grnd_level"
     }
 }
 
 // MARK: - Rain
+
 struct Rain: Codable {
     let the1H: Double
     
@@ -56,6 +57,8 @@ struct Rain: Codable {
         case the1H = "1h"
     }
 }
+
+// MARK: - Snow
 
 struct Snow: Codable {
     let the1H: Double?
@@ -68,6 +71,7 @@ struct Snow: Codable {
 }
 
 // MARK: - Sys
+
 struct Sys: Codable {
     let type, id: Int
     let message: Double?
@@ -76,6 +80,7 @@ struct Sys: Codable {
 }
 
 // MARK: - Weather
+
 struct Weather: Codable {
     let id: Int
     let main, weatherDescription, icon: String
@@ -88,7 +93,8 @@ struct Weather: Codable {
 }
 
 // MARK: - Wind
+
 struct Wind: Codable {
-    let speed: Double
-    let deg: Int
+    let speed: Double?
+    let deg: Int?
 }

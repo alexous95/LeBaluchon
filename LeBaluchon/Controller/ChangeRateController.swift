@@ -17,23 +17,27 @@ class ChangeRateController: UIViewController {
     @IBOutlet weak var amountTF: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - VARIABLES
+    // MARK: - Variables
     var exchangeRates: Exchange?
     
-    // MARK: - VIEWLIFECYCLE
+    // MARK: - View Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setupDelegate()
         roundedUI()
         activityWheel.isHidden = true
     }
     
-    // MARK: - ACTIONS
+    // MARK: - Actions
     
-    /// This action is used to retrieve the rates from the API
+    /// This action is used to retrieve the rates from the API. If there is an error an alert is shown.
     @IBAction func getRates() {
+        guard Double(amountTF.text!) != nil else {
+            showAlert(title: "Error", message: "You must enter a number to get the exchange rate")
+            return
+        }
         updateInterface(isHidden: convertButton.isHidden)
         activityWheel.startAnimating()
         ExchangeAPI().getExchange { (exchange, success) in
@@ -43,12 +47,16 @@ class ChangeRateController: UIViewController {
                 self.updateInterface(isHidden: self.convertButton.isHidden)
                 self.activityWheel.stopAnimating()
             } else {
+                self.showAlert(title: "Error", message: "An error occured when retrieving the data")
                 print("error")
             }
         }
     }
     
-    // MARK: - PRIVATE
+    // MARK: - Private methodes
+    
+    /// Get the amount choosen by the user
+    /// - Returns: A double wich holds the amount choosen by the user
     private func getAmount() -> Double {
         if let amountString = amountTF.text {
             guard let amount = Double(amountString) else {
@@ -59,6 +67,8 @@ class ChangeRateController: UIViewController {
         return -1
     }
     
+    /// Hide the convert button when a request is made and show the activity wheel during the request
+    /// - Parameter isHidden: This parameter represents the state of the convertButton (hidden or not)
     private func updateInterface(isHidden: Bool) {
         activityWheel.isHidden = isHidden
         convertButton.isHidden = !isHidden
@@ -77,7 +87,7 @@ class ChangeRateController: UIViewController {
     
 }
 
-// MARK: - EXTENSIONS
+// MARK: - Extension
 
 extension ChangeRateController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,7 +122,7 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
         guard let exchangeRate = exchangeRates[currentKey] else { return cell }
         
         cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)) )
-    
+        
         return cell
     }
     
