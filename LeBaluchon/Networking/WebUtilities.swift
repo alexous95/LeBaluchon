@@ -29,16 +29,17 @@ struct Fixer {
 }
 
 struct OpenWeatherURL {
-    
+   
     static private let endpoint = "https://api.openweathermap.org/data/2.5/weather"
     
-    static private let parameters = "?id=6455259&units=metric"
+    // This constant uses the id parameter for New-York from the openWeather API
+    static private let parametersNY = "?id=5128638&units=metric"
     
     static private let appID = "&APPID=\(APIKeys.OpenWeatherKey)"
     
     static let imgAdress = "http://openweathermap.org/img/wn/"
     
-    static var url: String {
-        return endpoint + parameters + appID
+    static var urlNY: String {
+        return endpoint + parametersNY + appID
     }
 }

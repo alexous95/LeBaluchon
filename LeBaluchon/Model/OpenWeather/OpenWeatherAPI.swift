@@ -15,8 +15,8 @@ final class OpenWeatherAPI {
     
     /// Create a request from our url
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
-    private func createWeatherRequest() -> URLRequest {
-        guard let weatherURL = URL(string: OpenWeatherURL.url) else {
+    private func createNYWeatherRequest() -> URLRequest {
+        guard let weatherURL = URL(string: OpenWeatherURL.urlNY) else {
             preconditionFailure("Invalid request URL")
         }
         var request = URLRequest(url: weatherURL)
@@ -38,7 +38,6 @@ final class OpenWeatherAPI {
         request.httpMethod = "GET"
         
         return request
-        
     }
     
     /// Request for json file from the API OpenWeather
@@ -48,9 +47,9 @@ final class OpenWeatherAPI {
     ///
     /// - This methode takes a closure as parameter to save and transmit an OpenWeather object and a boolean that indicate whether the
     /// query operation was successful or not to the controller
-    func getWeather(completionHandler: @escaping ((OpenWeather?, Bool) -> Void)) {
+    func getNYWeather(completionHandler: @escaping ((OpenWeather?, Bool) -> Void)) {
         
-        let request = createWeatherRequest()
+        let request = createNYWeatherRequest()
         let session = URLSession(configuration: .default)
         
         /// Constant that hold our JSONDecoder

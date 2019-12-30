@@ -117,6 +117,7 @@
 		FAB1B79A239C191D00243B7E /* LeBaluchon */ = {
 			isa = PBXGroup;
 			children = (
+				FACADA0423BA2B94008C002B /* Networking */,
 				FAB1B7C3239C19DD00243B7E /* Supporting Files */,
 				FAB1B7C2239C19D500243B7E /* Model */,
 				FAB1B7C1239C19CE00243B7E /* View */,
@@ -170,11 +171,18 @@
 				FAB1B79B239C191D00243B7E /* AppDelegate.swift */,
 				FAB1B79D239C191D00243B7E /* SceneDelegate.swift */,
 				FAB1B7A7239C191F00243B7E /* Assets.xcassets */,
-				FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */,
 				FAB39C7123B0DA5D009B102E /* APIKeys.swift */,
 				FAE0109E23B8CB440055D8D8 /* Extension.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FACADA0423BA2B94008C002B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

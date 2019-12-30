@@ -12,19 +12,35 @@ class WeatherController: UIViewController {
 
     // MARK: - Variables
     
-    var openWeather: OpenWeather?
+    var weatherNY: OpenWeather?
+    var weatherCurrent: OpenWeather?
     
     // MARK: - Outlets
     
     @IBOutlet weak var backViewNY: UIView!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var skyImage: UIImageView!
+    @IBOutlet weak var cityLabelNY: UILabel!
+    @IBOutlet weak var tempLabelNY: UILabel!
+    @IBOutlet weak var maxTempNY: UILabel!
+    @IBOutlet weak var minTempNY: UILabel!
+    @IBOutlet weak var descriptionLabelNY: UILabel!
+    @IBOutlet weak var skyImageNY: UIImageView!
+    @IBOutlet weak var maxTempImageNY: UIImageView!
+    @IBOutlet weak var minTempImageNY: UIImageView!
+    
+    @IBOutlet weak var backViewCurrent: UIView!
+    @IBOutlet weak var cityLabelCurrent: UILabel!
+    @IBOutlet weak var tempLabelCurrent: UILabel!
+    @IBOutlet weak var maxTempCurrent: UILabel!
+    @IBOutlet weak var minTempCurrent: UILabel!
+    @IBOutlet weak var descriptionLabelCurrent: UILabel!
+    @IBOutlet weak var skyImageCurrent: UIImageView!
+    @IBOutlet weak var maxTempImageCurrent: UIImageView!
+    @IBOutlet weak var minTempImageCurrent: UIImageView!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     // Update the UI only when the view will appear
@@ -36,9 +52,9 @@ class WeatherController: UIViewController {
     
     /// Assign to the variable openWeather the result from the request
     private func getWeather() {
-        OpenWeatherAPI().getWeather { (weather, success) in
+        OpenWeatherAPI().getNYWeather { (weather, success) in
             if success {
-                self.openWeather = weather
+                self.weatherNY = weather
                 self.updateUI()
             } else {
                 print("Erreur")
@@ -46,14 +62,37 @@ class WeatherController: UIViewController {
         }
     }
     
+    /// Configure the labels and the views
+    private func setupUI() {
+        backViewNY.layer.cornerRadius = 20
+        backViewCurrent.layer.cornerRadius = 20
+        
+        cityLabelNY.text = ""
+        tempLabelNY.text = ""
+        maxTempNY.text = ""
+        minTempNY.text = ""
+        descriptionLabelNY.text = ""
+        
+        cityLabelCurrent.text = ""
+        tempLabelCurrent.text = ""
+        maxTempCurrent.text = ""
+        minTempCurrent.text = ""
+        descriptionLabelCurrent.text = ""
+    }
+    
     /// Update the labels and images from with the data received
     private func updateUI() {
-        guard let weather = openWeather else { return }
-        cityLabel.text = weather.name
-        tempLabel.text = String(format: "%.0F°C", weather.main.temp)
-        descriptionLabel.text = weather.weather[0].weatherDescription
+        guard let weather = weatherNY else { return }
+        
+        cityLabelNY.text = weather.name
+        tempLabelNY.text = String(format: "%.0F°C", weather.main.temp)
+        maxTempNY.text = String(format: "%.0F°C", weather.main.tempMax)
+        minTempNY.text = String(format: "%.0F°C", weather.main.tempMin)
+        descriptionLabelNY.text = weather.weather[0].weatherDescription
+        
+        maxTempImageNY.image = UIImage(named: "MaxThermometer")
+        minTempImageNY.image = UIImage(named: "MinThermometer")
         getIcon(identifier: weather.weather[0].icon)
-        backViewNY.layer.cornerRadius = 20
     }
     
     /// Request an icon from the OpenWeatherApi and assign the result to the image propriety of Imageview.
@@ -65,7 +104,7 @@ class WeatherController: UIViewController {
                 guard let data = data else {
                     return
                 }
-                self.skyImage.image = UIImage(data: data)
+                self.skyImageNY.image = UIImage(data: data)
             } else {
                 print("On a pas l'image")
             }
