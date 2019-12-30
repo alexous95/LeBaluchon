@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherController: UIViewController {
 
@@ -14,6 +15,9 @@ class WeatherController: UIViewController {
     
     var weatherNY: OpenWeather?
     var weatherCurrent: OpenWeather?
+    var lon: Double?
+    var lat: Double?
+    let locationManager = CLLocationManager()
     
     // MARK: - Outlets
     
@@ -41,6 +45,7 @@ class WeatherController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupLocation()
     }
     
     // Update the UI only when the view will appear
@@ -50,6 +55,15 @@ class WeatherController: UIViewController {
   
     // MARK: - Private methodes
     
+    private func setupLocation() {
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.requestLocation()
+        }
+    }
     /// Assign to the variable openWeather the result from the request
     private func getWeather() {
         OpenWeatherAPI().getNYWeather { (weather, success) in
@@ -58,6 +72,19 @@ class WeatherController: UIViewController {
                 self.updateUI()
             } else {
                 print("Erreur")
+            }
+        }
+    }
+    
+    private func getCurrentWeather() {
+        guard let lon = lon, let lat = lat else { return }
+        OpenWeatherAPI().getCurrentWeather(lon: lon, lat: lat) { (currentWeather, success) in
+            if success {
+                print("on recupere la deuxieme partie")
+                self.weatherCurrent = currentWeather
+                self.updateUI()
+            } else {
+                print("erreur")
             }
         }
     }
@@ -82,17 +109,34 @@ class WeatherController: UIViewController {
     
     /// Update the labels and images from with the data received
     private func updateUI() {
-        guard let weather = weatherNY else { return }
+        if let weatherNY = weatherNY {
+            cityLabelNY.text = weatherNY.name
+            tempLabelNY.text = String(format: "%.0F°C", weatherNY.main.temp)
+            maxTempNY.text = String(format: "%.0F°C", weatherNY.main.tempMax)
+            minTempNY.text = String(format: "%.0F°C", weatherNY.main.tempMin)
+            descriptionLabelNY.text = weatherNY.weather[0].weatherDescription
+            maxTempImageNY.image = UIImage(named: "MaxThermometer")
+            minTempImageNY.image = UIImage(named: "MinThermometer")
+            getIcon(identifier: weatherNY.weather[0].icon)
+        }
+        else {
+            print("Failled to unwrap the weather object")
+            return
+        }
+        //print("On est la mais comme je suis idiot j'ai pas recuperer la deuxieme valeur")
+        if let currentWeather = weatherCurrent {
+            cityLabelCurrent.text = currentWeather.name
+            tempLabelCurrent.text = String(format: "%.0F°C", currentWeather.main.temp)
+            maxTempCurrent.text = String(format: "%.0F°C", currentWeather.main.tempMax)
+            minTempCurrent.text = String(format: "%.0F°C", currentWeather.main.tempMin)
+            maxTempImageCurrent.image = UIImage(named: "MaxThermometer")
+            minTempImageCurrent.image = UIImage(named: "MinThermometer")
+            getIcon(identifier: currentWeather.weather[0].icon)
+        } else {
+            print("failed to unwraped the currentWeather Object")
+            return
+        }
         
-        cityLabelNY.text = weather.name
-        tempLabelNY.text = String(format: "%.0F°C", weather.main.temp)
-        maxTempNY.text = String(format: "%.0F°C", weather.main.tempMax)
-        minTempNY.text = String(format: "%.0F°C", weather.main.tempMin)
-        descriptionLabelNY.text = weather.weather[0].weatherDescription
-        
-        maxTempImageNY.image = UIImage(named: "MaxThermometer")
-        minTempImageNY.image = UIImage(named: "MinThermometer")
-        getIcon(identifier: weather.weather[0].icon)
     }
     
     /// Request an icon from the OpenWeatherApi and assign the result to the image propriety of Imageview.
@@ -105,9 +149,23 @@ class WeatherController: UIViewController {
                     return
                 }
                 self.skyImageNY.image = UIImage(data: data)
+                self.skyImageCurrent.image = UIImage(data: data)
             } else {
                 print("On a pas l'image")
             }
         }
+    }
+}
+
+extension WeatherController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Une erreur est survenu et on a pas pus recuperer la localisation")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        lon = locValue.longitude
+        lat = locValue.latitude
+        getCurrentWeather()
     }
 }

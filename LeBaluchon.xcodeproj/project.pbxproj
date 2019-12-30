@@ -22,6 +22,7 @@
 		FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */; };
 		FAB7CBB3239F8E6800B4F47F /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBB2239F8E6800B4F47F /* WeatherController.swift */; };
 		FAB7CBB5239F93D900B4F47F /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBB4239F93D900B4F47F /* ExchangeAPI.swift */; };
+		FACADA0623BA2C24008C002B /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACADA0523BA2C24008C002B /* WeatherService.swift */; };
 		FAE0109F23B8CB440055D8D8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0109E23B8CB440055D8D8 /* Extension.swift */; };
 		FAE9FEC123A8DD8900F7F76E /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9FEC023A8DD8900F7F76E /* Exchange.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
 		FAB7CBB2239F8E6800B4F47F /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		FAB7CBB4239F93D900B4F47F /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
+		FACADA0523BA2C24008C002B /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		FAE0109E23B8CB440055D8D8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FAE9FEC023A8DD8900F7F76E /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,8 +119,8 @@
 		FAB1B79A239C191D00243B7E /* LeBaluchon */ = {
 			isa = PBXGroup;
 			children = (
-				FACADA0423BA2B94008C002B /* Networking */,
 				FAB1B7C3239C19DD00243B7E /* Supporting Files */,
+				FACADA0423BA2B94008C002B /* Networking */,
 				FAB1B7C2239C19D500243B7E /* Model */,
 				FAB1B7C1239C19CE00243B7E /* View */,
 				FAB1B7C0239C19C200243B7E /* Controller */,
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */,
+				FACADA0523BA2C24008C002B /* WeatherService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */,
 				FAB39C7223B0DA5D009B102E /* APIKeys.swift in Sources */,
 				FAB1B79E239C191D00243B7E /* SceneDelegate.swift in Sources */,
+				FACADA0623BA2C24008C002B /* WeatherService.swift in Sources */,
 				FAB7CBB5239F93D900B4F47F /* ExchangeAPI.swift in Sources */,
 				FAB7CBB3239F8E6800B4F47F /* WeatherController.swift in Sources */,
 				FA5A15CC23B6373200373B63 /* OpenWeatherAPI.swift in Sources */,
