@@ -51,7 +51,7 @@ class WeatherController: UIViewController {
     // Update the UI only when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         getWeather()
-        setupWeatherGradient()
+        //setupWeatherGradient()
     }
     
     // MARK: - Private methodes
@@ -91,8 +91,8 @@ class WeatherController: UIViewController {
     
     /// Configure the labels and the views
     private func setupUI() {
-        setupWeatherGradient()
-        //setupBackGradient()
+        //setupWeatherGradient()
+        setupBackGradient()
     
         cityLabelNY.text = ""
         tempLabelNY.text = ""
@@ -109,9 +109,9 @@ class WeatherController: UIViewController {
     
     private func setupWeatherGradient() {
         if #available(iOS 13.0, *) {
-            let traitCollectionNY = view.traitCollection
-            guard let startColor = UIColor(named: "StartColorWeather")?.resolvedColor(with: traitCollectionNY) else { return }
-            guard let endColor = UIColor(named: "EndColorWeather")?.resolvedColor(with: traitCollectionNY) else { return }
+            //let traitCollectionNY = view.traitCollection
+            guard let startColor = UIColor(named: "StartColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
+            guard let endColor = UIColor(named: "EndColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
             
             let gradientNY = CAGradientLayer()
             let gradientCurrent = CAGradientLayer()
