@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA56193923BE07ED0098E35B /* DetailWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56193823BE07ED0098E35B /* DetailWeatherController.swift */; };
+		FA56193B23BE0A790098E35B /* DetailWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56193A23BE0A790098E35B /* DetailWeatherCell.swift */; };
 		FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */; };
 		FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */; };
 		FA5A15C823B6365200373B63 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15C723B6365200373B63 /* OpenWeather.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA56193823BE07ED0098E35B /* DetailWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherController.swift; sourceTree = "<group>"; };
+		FA56193A23BE0A790098E35B /* DetailWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherCell.swift; sourceTree = "<group>"; };
 		FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUtilities.swift; sourceTree = "<group>"; };
 		FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTableViewCell.swift; sourceTree = "<group>"; };
 		FA5A15C723B6365200373B63 /* OpenWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				FAB7CBAE239F8DE600B4F47F /* ChangeRateController.swift */,
 				FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */,
 				FAB7CBB2239F8E6800B4F47F /* WeatherController.swift */,
+				FA56193823BE07ED0098E35B /* DetailWeatherController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				FAB1B7A1239C191D00243B7E /* Main.storyboard */,
 				FAB1B7A9239C191F00243B7E /* LaunchScreen.storyboard */,
 				FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */,
+				FA56193A23BE0A790098E35B /* DetailWeatherCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,9 +300,11 @@
 				FAB7CBAF239F8DE600B4F47F /* ChangeRateController.swift in Sources */,
 				FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */,
 				FAB39C7223B0DA5D009B102E /* APIKeys.swift in Sources */,
+				FA56193B23BE0A790098E35B /* DetailWeatherCell.swift in Sources */,
 				FAB1B79E239C191D00243B7E /* SceneDelegate.swift in Sources */,
 				FACADA0623BA2C24008C002B /* WeatherService.swift in Sources */,
 				FAB7CBB5239F93D900B4F47F /* ExchangeAPI.swift in Sources */,
+				FA56193923BE07ED0098E35B /* DetailWeatherController.swift in Sources */,
 				FAB7CBB3239F8E6800B4F47F /* WeatherController.swift in Sources */,
 				FA5A15CC23B6373200373B63 /* OpenWeatherAPI.swift in Sources */,
 				FAE0109F23B8CB440055D8D8 /* Extension.swift in Sources */,

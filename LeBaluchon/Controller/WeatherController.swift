@@ -21,7 +21,6 @@ class WeatherController: UIViewController {
     let backGradient = CAGradientLayer()
     let gradientCurrent = CAGradientLayer()
     let locationManager = CLLocationManager()
-    //var dimension: CGRect?
     
     // MARK: - Outlets
     
@@ -48,7 +47,6 @@ class WeatherController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dimension = self.backViewNY.bounds
         setupUI()
         setupLocation()
     }
@@ -56,7 +54,6 @@ class WeatherController: UIViewController {
     // Update the UI only when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         getWeather()
-        setupWeatherGradient()
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,8 +66,23 @@ class WeatherController: UIViewController {
         setupBackGradient()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailNYSegue" {
+            let destVC = segue.destination as! DetailWeatherController
+            destVC.weather = weatherNY
+        }
+        if segue.identifier == "detailCurrentSegue" {
+            let destVC = segue.destination as! DetailWeatherController
+            destVC.weather = weatherCurrent
+        }
+    }
+    
     // MARK: - Private methodes
     
+    /// This function is used to setup the location manager. The location accuracy is set to three kilometers to get
+    /// quick result
     private func setupLocation() {
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -80,6 +92,7 @@ class WeatherController: UIViewController {
             locationManager.requestLocation()
         }
     }
+    
     /// Assign to the variable openWeather the result from the request
     private func getWeather() {
         OpenWeatherAPI().getNYWeather { (weather, success) in
@@ -122,14 +135,18 @@ class WeatherController: UIViewController {
         descriptionLabelCurrent.text = ""
     }
     
+    /// This function is used to setup the gradient on the two view that displays the weather. If we are on ios 13 or earlier
+    /// we change the appearance based on the device
     private func setupWeatherGradient() {
         if #available(iOS 13.0, *) {
+            // The color we use to create our gradient
             guard let startColor = UIColor(named: "StartColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
             guard let endColor = UIColor(named: "EndColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
         
             gradientNY.colors = [startColor.cgColor, endColor.cgColor]
             gradientCurrent.colors = [startColor.cgColor, endColor.cgColor]
             
+            // We use insertSublayer to insure that the gradient is at the top of all the layers
             backViewNY.layer.insertSublayer(gradientNY, at: 0)
             backViewCurrent.layer.insertSublayer(gradientCurrent, at: 0)
             
@@ -145,6 +162,8 @@ class WeatherController: UIViewController {
         }
     }
     
+    /// This function is used to setup the gradient on the background view. If we are on ios 13 or earlier we change the appearance
+    /// bases on the device
     private func setupBackGradient() {
         if #available(iOS 13.0, *) {
             guard let startColor = UIColor(named: "BackgroundStart")?.resolvedColor(with: self.traitCollection) else { return }
@@ -230,11 +249,14 @@ class WeatherController: UIViewController {
     }
 }
 
+// MARK: - Extensions
+
 extension WeatherController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Une erreur est survenu et on a pas pus recuperer la localisation")
     }
     
+    // This function is called every time the location change
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         lon = locValue.longitude
