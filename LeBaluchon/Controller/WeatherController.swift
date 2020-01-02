@@ -17,7 +17,11 @@ class WeatherController: UIViewController {
     var weatherCurrent: OpenWeather?
     var lon: Double?
     var lat: Double?
+    let gradientNY = CAGradientLayer()
+    let backGradient = CAGradientLayer()
+    let gradientCurrent = CAGradientLayer()
     let locationManager = CLLocationManager()
+    //var dimension: CGRect?
     
     // MARK: - Outlets
     
@@ -44,6 +48,7 @@ class WeatherController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        //dimension = self.backViewNY.bounds
         setupUI()
         setupLocation()
     }
@@ -51,7 +56,14 @@ class WeatherController: UIViewController {
     // Update the UI only when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         getWeather()
-        //setupWeatherGradient()
+        setupWeatherGradient()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientNY.frame = backViewNY.bounds
+        gradientCurrent.frame = backViewCurrent.bounds
+        backGradient.frame = view.bounds
     }
     
     // MARK: - Private methodes
@@ -91,9 +103,9 @@ class WeatherController: UIViewController {
     
     /// Configure the labels and the views
     private func setupUI() {
-        //setupWeatherGradient()
         setupBackGradient()
-    
+        setupWeatherGradient()
+        
         cityLabelNY.text = ""
         tempLabelNY.text = ""
         maxTempNY.text = ""
@@ -109,16 +121,10 @@ class WeatherController: UIViewController {
     
     private func setupWeatherGradient() {
         if #available(iOS 13.0, *) {
-            //let traitCollectionNY = view.traitCollection
             guard let startColor = UIColor(named: "StartColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
             guard let endColor = UIColor(named: "EndColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
-            
-            let gradientNY = CAGradientLayer()
-            let gradientCurrent = CAGradientLayer()
-            
-            gradientNY.frame = backViewNY.bounds
+        
             gradientNY.colors = [startColor.cgColor, endColor.cgColor]
-            gradientCurrent.frame = backViewCurrent.bounds
             gradientCurrent.colors = [startColor.cgColor, endColor.cgColor]
             
             backViewNY.layer.insertSublayer(gradientNY, at: 0)
@@ -127,12 +133,8 @@ class WeatherController: UIViewController {
         } else {
             guard let startColor = UIColor(named: "StartColorWeather") else { return }
             guard let endColor = UIColor(named: "EndColorWeather") else { return }
-            let gradientNY = CAGradientLayer()
-            let gradientCurrent = CAGradientLayer()
             
-            gradientNY.frame = backViewNY.bounds
             gradientNY.colors = [startColor.cgColor, endColor.cgColor]
-            gradientCurrent.frame = backViewCurrent.bounds
             gradientCurrent.colors = [startColor.cgColor, endColor.cgColor]
             
             backViewNY.layer.insertSublayer(gradientNY, at: 0)
@@ -142,13 +144,9 @@ class WeatherController: UIViewController {
     
     private func setupBackGradient() {
         if #available(iOS 13.0, *) {
-            let traitCollectionNY = view.traitCollection
-            guard let startColor = UIColor(named: "BackgroundStart")?.resolvedColor(with: traitCollectionNY) else { return }
-            guard let endColor = UIColor(named: "BackgroundEnd")?.resolvedColor(with: traitCollectionNY) else { return }
+            guard let startColor = UIColor(named: "BackgroundStart")?.resolvedColor(with: self.traitCollection) else { return }
+            guard let endColor = UIColor(named: "BackgroundEnd")?.resolvedColor(with: self.traitCollection) else { return }
             
-            let backGradient = CAGradientLayer()
-            
-            backGradient.frame = view.bounds
             backGradient.colors = [startColor.cgColor, endColor.cgColor]
             
             view.layer.insertSublayer(backGradient, at: 0)

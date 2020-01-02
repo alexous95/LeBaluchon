@@ -91,7 +91,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L01-qF-Jkw">
-                                <rect key="frame" x="22" y="44" width="117" height="41"/>
+                                <rect key="frame" x="22" y="44" width="117" height="69"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -121,6 +121,7 @@
                             <constraint firstItem="JDO-mQ-sqB" firstAttribute="top" secondItem="hml-k1-Yyn" secondAttribute="top" constant="79" id="Eq3-F1-ayK"/>
                             <constraint firstItem="hml-k1-Yyn" firstAttribute="bottom" secondItem="llg-Cg-E7D" secondAttribute="bottom" id="H4w-zx-oGz"/>
                             <constraint firstItem="L01-qF-Jkw" firstAttribute="leading" secondItem="hml-k1-Yyn" secondAttribute="leading" constant="22" id="Hzq-6a-ngZ"/>
+                            <constraint firstItem="3XJ-mF-r95" firstAttribute="top" secondItem="L01-qF-Jkw" secondAttribute="bottom" constant="10" id="IBH-qO-hZE"/>
                             <constraint firstItem="llg-Cg-E7D" firstAttribute="top" secondItem="JDO-mQ-sqB" secondAttribute="bottom" constant="40" id="ISS-1e-fEk"/>
                             <constraint firstItem="hml-k1-Yyn" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L01-qF-Jkw" secondAttribute="trailing" symbolic="YES" id="KN3-tn-DSI"/>
                             <constraint firstItem="3XJ-mF-r95" firstAttribute="top" secondItem="JDO-mQ-sqB" secondAttribute="top" id="Qap-4q-hOn"/>
