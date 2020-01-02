@@ -24,9 +24,8 @@ class ChangeRateController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
         setupDelegate()
-        roundedUI()
         activityWheel.isHidden = true
     }
     
@@ -80,11 +79,41 @@ class ChangeRateController: UIViewController {
         amountTF.delegate = self
     }
     
-    private func roundedUI() {
-        convertButton.layer.cornerRadius = 15
-        tableView.layer.cornerRadius = 15
+    private func setupUI() {
+        
+        if #available(iOS 13.0, *) {
+            guard let startColor = UIColor(named: "StartColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
+            guard let endColor = UIColor(named: "EndColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
+            
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = view.bounds
+            gradient.colors = [startColor.cgColor, endColor.cgColor]
+            view.layer.insertSublayer(gradient, at: 0)
+            
+            convertButton.layer.borderColor = UIColor.white.cgColor
+            convertButton.layer.borderWidth = 1.0
+            
+            amountTF.layer.borderColor = UIColor.white.cgColor
+            amountTF.layer.borderWidth = 1.0
+            
+        } else {
+            guard let startColor = UIColor(named: "StartColorExchange") else { return }
+            guard let endColor = UIColor(named: "EndColorExchange") else { return }
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = view.bounds
+            gradient.colors = [startColor.cgColor, endColor.cgColor]
+            view.layer.insertSublayer(gradient, at: 0)
+            
+            convertButton.layer.borderColor = UIColor.white.cgColor
+            convertButton.layer.borderWidth = 1.0
+            
+            amountTF.layer.borderColor = UIColor.white.cgColor
+            amountTF.layer.borderWidth = 1.0
+        }
+       
     }
-    
 }
 
 // MARK: - Extension
