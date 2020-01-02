@@ -17,6 +17,8 @@ class ChangeRateController: UIViewController {
     @IBOutlet weak var amountTF: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    let gradient = CAGradientLayer()
+    
     // MARK: - Variables
     var exchangeRates: Exchange?
     
@@ -27,8 +29,16 @@ class ChangeRateController: UIViewController {
         setupUI()
         setupDelegate()
         activityWheel.isHidden = true
+        getRatesForOne()
     }
     
+    // This methode is used to update the UI if the dark mode is activated
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradient.frame = view.bounds
+        setupUI()
+        
+    }
     // MARK: - Actions
     
     /// This action is used to retrieve the rates from the API. If there is an error an alert is shown.
@@ -45,8 +55,9 @@ class ChangeRateController: UIViewController {
                 self.tableView.reloadData()
                 self.updateInterface(isHidden: self.convertButton.isHidden)
                 self.activityWheel.stopAnimating()
+                self.view.endEditing(true)
             } else {
-                self.showAlert(title: "Error", message: "An error occured when retrieving the data")
+                self.showAlert(title: "Error", message: "An error occured while retrieving the data")
                 print("error")
             }
         }
@@ -63,7 +74,14 @@ class ChangeRateController: UIViewController {
             }
             return amount
         }
-        return -1
+        return 1
+    }
+    
+    private func getRatesForOne() {
+        ExchangeAPI().getExchange { (exchange, success) in
+            self.exchangeRates = exchange
+            self.tableView.reloadData()
+        }
     }
     
     /// Hide the convert button when a request is made and show the activity wheel during the request
@@ -73,6 +91,7 @@ class ChangeRateController: UIViewController {
         convertButton.isHidden = !isHidden
     }
     
+    /// Sets the delegates to the ViewController
     private func setupDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,9 +104,7 @@ class ChangeRateController: UIViewController {
             guard let startColor = UIColor(named: "StartColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
             guard let endColor = UIColor(named: "EndColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
             
-            let gradient = CAGradientLayer()
             
-            gradient.frame = view.bounds
             gradient.colors = [startColor.cgColor, endColor.cgColor]
             view.layer.insertSublayer(gradient, at: 0)
             
@@ -149,9 +166,11 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
         let currentKey = arrayKey[indexPath.row]
         let amount = getAmount()
         guard let exchangeRate = exchangeRates[currentKey] else { return cell }
-        
-        cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)) )
-        
+        if amount == -1 {
+            cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * 1)))
+        } else {
+            cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)) )
+        }
         return cell
     }
     

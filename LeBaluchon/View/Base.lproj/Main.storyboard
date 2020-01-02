@@ -47,7 +47,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hy3-Bs-vH6">
                                                             <rect key="frame" x="66" y="32" width="46.666666666666657" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                            <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZU-DT-2Kh">
@@ -56,7 +56,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="mXs-ic-Vdo"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                            <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -135,7 +135,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hml-k1-Yyn"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Exchange" image="icons8-échange-euro-50" id="3s5-5m-RNj"/>
+                    <tabBarItem key="tabBarItem" title="Exchange" image="icons8-échange-euro-50" id="3s5-5m-RNj"/>
                     <connections>
                         <outlet property="activityWheel" destination="Adk-dc-zc8" id="uIl-jW-RCQ"/>
                         <outlet property="amountTF" destination="3XJ-mF-r95" id="cVG-AL-wqi"/>
@@ -344,7 +344,7 @@
                         <viewLayoutGuide key="safeArea" id="cfy-Jj-QLR"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Weather" image="icons8-thermomètre-automatique-50" id="V4q-vR-w7l"/>
+                    <tabBarItem key="tabBarItem" title="Weather" image="icons8-thermomètre-automatique-50" id="V4q-vR-w7l"/>
                     <connections>
                         <outlet property="backViewCurrent" destination="7Kq-tk-eaZ" id="IOE-5m-sI7"/>
                         <outlet property="backViewNY" destination="yMb-mc-2EA" id="ryt-Li-2Jq"/>
@@ -408,8 +408,8 @@
     </scenes>
     <resources>
         <image name="Transparent" width="0.5" height="0.5"/>
-        <image name="icons8-échange-euro-50" width="25" height="25"/>
-        <image name="icons8-thermomètre-automatique-50" width="25" height="25"/>
+        <image name="icons8-échange-euro-50" width="25" height="25"/>
+        <image name="icons8-thermomètre-automatique-50" width="25" height="25"/>
         <namedColor name="BackColor">
             <color red="0.39215686274509803" green="0.78431372549019607" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

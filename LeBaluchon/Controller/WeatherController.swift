@@ -64,6 +64,9 @@ class WeatherController: UIViewController {
         gradientNY.frame = backViewNY.bounds
         gradientCurrent.frame = backViewCurrent.bounds
         backGradient.frame = view.bounds
+        
+        setupWeatherGradient()
+        setupBackGradient()
     }
     
     // MARK: - Private methodes
