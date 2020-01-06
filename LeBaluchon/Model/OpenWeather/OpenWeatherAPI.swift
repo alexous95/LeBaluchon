@@ -16,7 +16,7 @@ final class OpenWeatherAPI {
     /// Create a request from our url
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
     private func createNYWeatherRequest() -> URLRequest {
-        guard let weatherNYUrl = URL(string: WeatherService.createNYRequest()) else {
+        guard let weatherNYUrl = URL(string: WeatherService.createNYStringRequest()) else {
             preconditionFailure("Invalid request URL")
         }
         var request = URLRequest(url: weatherNYUrl)
@@ -30,7 +30,7 @@ final class OpenWeatherAPI {
     /// - Parameter lat: The latitude of the position
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
     private func createCurrentWeatherRequest(lon: Double, lat: Double) -> URLRequest {
-        guard let currentWeatherUrl = URL(string: WeatherService.createCurrentRequest(lon: lon, lat: lat)) else {
+        guard let currentWeatherUrl = URL(string: WeatherService.createCurrentStringRequest(lon: lon, lat: lat)) else {
             preconditionFailure("Invalid URL request")
         }
         

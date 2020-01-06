@@ -10,7 +10,7 @@ import Foundation
 
 struct WeatherService {
     
-    static func createNYRequest() -> String {
+    static func createNYStringRequest() -> String {
         let endpoint = OpenWeatherURL.endpoint
         // This constant uses the id parameter for New-York from the openWeather API
         let parametersNY = "?id=5128638&units=metric"
@@ -20,7 +20,7 @@ struct WeatherService {
         return endpoint + parametersNY + appID
     }
     
-    static func createCurrentRequest(lon: Double, lat: Double)  -> String {
+    static func createCurrentStringRequest(lon: Double, lat: Double)  -> String {
         let endpoint = OpenWeatherURL.endpoint
         let parameters = "?lat=\(lat)&lon=\(lon)&units=metric"
         let appID = "&APPID=\(APIKeys.OpenWeatherKey)"

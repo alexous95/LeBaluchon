@@ -459,14 +459,89 @@
                     <view key="view" contentMode="scaleToFill" id="wKG-nB-P5p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EoG-VR-IBY">
+                                <rect key="frame" x="0.0" y="49" width="375" height="675"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnD-YO-I1g">
+                                        <rect key="frame" x="167.66666666666666" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="eO2-tl-UwZ"/>
+                                            <constraint firstAttribute="width" constant="40" id="hGv-Nw-MWS"/>
+                                        </constraints>
+                                        <state key="normal" title="en">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVY-j4-4N8">
+                                        <rect key="frame" x="23.666666666666657" y="55.000000000000014" width="327.66666666666674" height="252.33333333333337"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py2-Z6-RnX">
+                                        <rect key="frame" x="147.66666666666666" y="322.33333333333331" width="80" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Gca-VK-6uf"/>
+                                            <constraint firstAttribute="height" constant="30" id="viG-YE-ZoR"/>
+                                        </constraints>
+                                        <state key="normal" title="Translate">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getTranslation" destination="VMQ-BP-CKp" eventType="touchUpInside" id="yPw-sg-1SE"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPv-EW-tmM">
+                                        <rect key="frame" x="26" y="367.33333333333331" width="323" height="252.66666666666669"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dD-YB-rgp">
+                                        <rect key="frame" x="167.66666666666666" y="635" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8Y5-pH-bpH"/>
+                                            <constraint firstAttribute="width" constant="40" id="Awb-Gg-YXx"/>
+                                        </constraints>
+                                        <state key="normal" title="fr">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FVY-j4-4N8" firstAttribute="leading" secondItem="EoG-VR-IBY" secondAttribute="leading" constant="23.666666666666657" id="g9K-lz-zwP"/>
+                                    <constraint firstItem="vPv-EW-tmM" firstAttribute="leading" secondItem="EoG-VR-IBY" secondAttribute="leading" constant="26" id="pkZ-JN-1sE"/>
+                                    <constraint firstItem="vPv-EW-tmM" firstAttribute="height" secondItem="FVY-j4-4N8" secondAttribute="height" multiplier="1.0021" id="zG6-Cu-nOS"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6b7-7P-KaS" firstAttribute="bottom" secondItem="EoG-VR-IBY" secondAttribute="bottom" constant="5" id="Lt0-JI-aOK"/>
+                            <constraint firstItem="EoG-VR-IBY" firstAttribute="leading" secondItem="6b7-7P-KaS" secondAttribute="leading" id="dBz-xX-a9r"/>
+                            <constraint firstItem="6b7-7P-KaS" firstAttribute="trailing" secondItem="EoG-VR-IBY" secondAttribute="trailing" id="jGL-5O-Hns"/>
+                            <constraint firstItem="EoG-VR-IBY" firstAttribute="top" secondItem="6b7-7P-KaS" secondAttribute="top" constant="5" id="spx-Xp-pM3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6b7-7P-KaS"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translate" id="bN3-0C-2WW"/>
+                    <connections>
+                        <outlet property="sourceLanguage" destination="FnD-YO-I1g" id="9SM-Nv-Ldd"/>
+                        <outlet property="targetLanguage" destination="3dD-YB-rgp" id="2kF-Ui-aB8"/>
+                        <outlet property="textToTranslate" destination="FVY-j4-4N8" id="KW9-wx-k0C"/>
+                        <outlet property="translateButton" destination="Py2-Z6-RnX" id="4he-ob-N0P"/>
+                        <outlet property="translatedText" destination="vPv-EW-tmM" id="ch5-hv-kyz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r7-oo-yt2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="-356"/>
+            <point key="canvasLocation" x="-247.19999999999999" y="-356.1576354679803"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oMD-1H-nMf">

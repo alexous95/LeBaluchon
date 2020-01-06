@@ -56,6 +56,7 @@ class WeatherController: UIViewController {
         getWeather()
     }
     
+    // We set the anew the frame of all gradients to update their appearence if the dark mode is triggered
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientNY.frame = backViewNY.bounds
@@ -87,9 +88,23 @@ class WeatherController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-            locationManager.requestLocation()
+            let status = CLLocationManager.authorizationStatus()
+            
+            switch status {
+            case .denied, .restricted:
+                let alert = UIAlertController(title: "Location services disable", message: "Please enable location services in Settings", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                
+                present(alert, animated: true, completion: nil)
+            case .authorizedAlways, .authorizedWhenInUse, .notDetermined:
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+                locationManager.requestLocation()
+                
+            default:
+                print("je sais pas quoi mettre ici")
+            }
         }
     }
     
@@ -142,7 +157,7 @@ class WeatherController: UIViewController {
             // The color we use to create our gradient
             guard let startColor = UIColor(named: "StartColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
             guard let endColor = UIColor(named: "EndColorWeather")?.resolvedColor(with: self.traitCollection) else { return }
-        
+            
             gradientNY.colors = [startColor.cgColor, endColor.cgColor]
             gradientCurrent.colors = [startColor.cgColor, endColor.cgColor]
             
@@ -251,6 +266,7 @@ class WeatherController: UIViewController {
 
 // MARK: - Extensions
 
+// This methodes are called only if the user allows to use the location serices
 extension WeatherController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Une erreur est survenu et on a pas pus recuperer la localisation")

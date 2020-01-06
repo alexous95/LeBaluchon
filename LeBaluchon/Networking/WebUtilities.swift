@@ -31,7 +31,13 @@ struct Fixer {
 struct OpenWeatherURL {
    
     static let endpoint = "https://api.openweathermap.org/data/2.5/weather"
-    
     static let imgAdress = "http://openweathermap.org/img/wn/"
     
 }
+
+struct Google {
+    static let scheme = "https"
+    static let host = "translation.googleapis.com"
+    static let path = "/language/translate/v2"
+}
+
