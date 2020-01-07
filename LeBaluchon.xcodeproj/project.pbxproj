@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FA0B899B23C32C7300417D1B /* TranslateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B899A23C32C7300417D1B /* TranslateAPI.swift */; };
 		FA0B899D23C331F300417D1B /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B899C23C331F300417D1B /* Translate.swift */; };
+		FA0B89A123C4880300417D1B /* LanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B89A023C4880300417D1B /* LanguageController.swift */; };
 		FA56193923BE07ED0098E35B /* DetailWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56193823BE07ED0098E35B /* DetailWeatherController.swift */; };
 		FA56193B23BE0A790098E35B /* DetailWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56193A23BE0A790098E35B /* DetailWeatherCell.swift */; };
 		FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		FA0B899A23C32C7300417D1B /* TranslateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateAPI.swift; sourceTree = "<group>"; };
 		FA0B899C23C331F300417D1B /* Translate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
+		FA0B89A023C4880300417D1B /* LanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageController.swift; sourceTree = "<group>"; };
 		FA56193823BE07ED0098E35B /* DetailWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherController.swift; sourceTree = "<group>"; };
 		FA56193A23BE0A790098E35B /* DetailWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherCell.swift; sourceTree = "<group>"; };
 		FA57D9CA23AA1B2600D54A11 /* WebUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUtilities.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */,
 				FAB7CBB2239F8E6800B4F47F /* WeatherController.swift */,
 				FA56193823BE07ED0098E35B /* DetailWeatherController.swift */,
+				FA0B89A023C4880300417D1B /* LanguageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				FAE9FEC123A8DD8900F7F76E /* Exchange.swift in Sources */,
 				FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */,
 				FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */,
+				FA0B89A123C4880300417D1B /* LanguageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

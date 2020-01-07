@@ -473,6 +473,9 @@
                                         <state key="normal" title="en">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="haY-jP-Mav" kind="presentation" identifier="sourceSegue" id="L7D-rY-Diy"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVY-j4-4N8">
                                         <rect key="frame" x="23.666666666666657" y="55.000000000000014" width="327.66666666666674" height="252.33333333333337"/>
@@ -512,6 +515,9 @@
                                         <state key="normal" title="fr">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="haY-jP-Mav" kind="presentation" identifier="targetSegue" id="fcg-rE-2te"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -530,7 +536,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6b7-7P-KaS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Translate" id="bN3-0C-2WW"/>
+                    <tabBarItem key="tabBarItem" title="Translate" image="Language" id="bN3-0C-2WW"/>
                     <connections>
                         <outlet property="sourceLanguage" destination="FnD-YO-I1g" id="9SM-Nv-Ldd"/>
                         <outlet property="targetLanguage" destination="3dD-YB-rgp" id="2kF-Ui-aB8"/>
@@ -542,6 +548,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r7-oo-yt2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="-356.1576354679803"/>
+        </scene>
+        <!--Language Controller-->
+        <scene sceneID="rGq-LO-xYH">
+            <objects>
+                <viewController id="haY-jP-Mav" customClass="LanguageController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M4E-41-GLa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ez0-en-WbL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="languageCell" textLabel="4nH-Y2-WTs" detailTextLabel="Lr4-kt-Zjg" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="8vs-PT-W0l">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="91"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8vs-PT-W0l" id="whN-Wy-a4L">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4nH-Y2-WTs">
+                                                    <rect key="frame" x="15" y="26" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lr4-kt-Zjg">
+                                                    <rect key="frame" x="14.999999999999996" y="49.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Cbo-ct-QHb" firstAttribute="trailing" secondItem="ez0-en-WbL" secondAttribute="trailing" id="Voi-qd-pHh"/>
+                            <constraint firstItem="ez0-en-WbL" firstAttribute="leading" secondItem="Cbo-ct-QHb" secondAttribute="leading" id="rJ5-jE-z8S"/>
+                            <constraint firstItem="Cbo-ct-QHb" firstAttribute="bottom" secondItem="ez0-en-WbL" secondAttribute="bottom" id="vmS-3d-Z9m"/>
+                            <constraint firstItem="ez0-en-WbL" firstAttribute="top" secondItem="Cbo-ct-QHb" secondAttribute="top" id="wMx-Lb-gVY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Cbo-ct-QHb"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ez0-en-WbL" id="tEK-ql-mxY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tM4-VR-yhf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="704.79999999999995" y="-356.1576354679803"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oMD-1H-nMf">
@@ -565,6 +627,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Language" width="25" height="25"/>
         <image name="Transparent" width="0.5" height="0.5"/>
         <image name="icons8-échange-euro-50" width="25" height="25"/>
         <image name="icons8-thermomètre-automatique-50" width="25" height="25"/>
@@ -573,6 +636,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fcg-rE-2te"/>
         <segue reference="Zub-6l-xxF"/>
     </inferredMetricsTieBreakers>
 </document>

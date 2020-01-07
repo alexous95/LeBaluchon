@@ -73,6 +73,7 @@ final class TranslateAPI {
             let url = urlComponents.url ?? URL(fileURLWithPath: "")
             
             var request = URLRequest(url: url)
+            // Using a GET request with a body is impossible since ios 13 so the http methode is replaced by a post
             request.httpMethod = "POST"
             request.httpBody = body
             

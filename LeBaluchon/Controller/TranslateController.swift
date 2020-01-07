@@ -37,6 +37,11 @@ class TranslateController: UIViewController {
         setupUI()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sourceSegue" {
+            
+        }
+    }
     // MARK: - Action
     
     /// This function is used to query a translation from the input text
