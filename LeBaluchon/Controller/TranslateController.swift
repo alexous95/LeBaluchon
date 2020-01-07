@@ -10,17 +10,24 @@ import UIKit
 
 class TranslateController: UIViewController {
 
+    // MARK: - Outlets
+    
     @IBOutlet weak var sourceLanguage: UIButton!
     @IBOutlet weak var textToTranslate: UITextView!
     @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var translatedText: UITextView!
     @IBOutlet weak var targetLanguage: UIButton!
     
+    // MARK: - Variables
+    
     var translation: Translate?
     var backGradient = CAGradientLayer()
     
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        textToTranslate.delegate = self
         setupUI()
     }
     
@@ -30,6 +37,9 @@ class TranslateController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Action
+    
+    /// This function is used to query a translation from the input text
     @IBAction func getTranslation() {
         guard let source = sourceLanguage.titleLabel?.text else { return }
         guard let text = textToTranslate.text else { return }
@@ -48,17 +58,21 @@ class TranslateController: UIViewController {
         }
     }
     
+    // MARK: - Private
+    
+    /// This function is used to setup our view
     private func setupUI() {
         setupBackGradient()
-        
-        textToTranslate.text = ""
-        translatedText.text = ""
-        
+       
         sourceLanguage.layer.borderColor = UIColor.white.cgColor
         textToTranslate.layer.borderColor = UIColor.white.cgColor
         translatedText.layer.borderColor = UIColor.white.cgColor
         targetLanguage.layer.borderColor = UIColor.white.cgColor
         translateButton.layer.borderColor = UIColor.white.cgColor
+        
+        sourceLanguage.layer.cornerRadius = sourceLanguage.frame.height/2
+        targetLanguage.layer.cornerRadius = targetLanguage.frame.height/2
+        translateButton.layer.cornerRadius = 10
         
         sourceLanguage.layer.borderWidth = 1.0
         targetLanguage.layer.borderWidth = 1.0
@@ -71,6 +85,7 @@ class TranslateController: UIViewController {
         
     }
     
+    /// Creates two colors to make a gradient that will be used by the background view
     private func setupBackGradient() {
         if #available(iOS 13.0, *) {
             guard let startColor = UIColor(named: "StartColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
@@ -92,4 +107,18 @@ class TranslateController: UIViewController {
         }
     }
     
+}
+
+// MARK: - Extension
+
+extension TranslateController: UITextViewDelegate {
+    
+    // This function is used to hide the keyboard when the return key is pressed
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

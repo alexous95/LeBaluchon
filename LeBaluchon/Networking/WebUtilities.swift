@@ -39,5 +39,6 @@ struct Google {
     static let scheme = "https"
     static let host = "translation.googleapis.com"
     static let path = "/language/translate/v2"
+    static let languageEndpoint = "/languages"
 }
 

@@ -19,3 +19,16 @@ struct Translate: Codable {
         }
     }
 }
+
+struct SupportedLanguages: Codable {
+    let data: LanguageSupportedList
+    
+    struct LanguageSupportedList: Codable {
+        var languages: [SupportedLanguagesResponse]
+        
+        struct SupportedLanguagesResponse: Codable {
+            var language: String
+            var name: String
+        }
+    }
+}
