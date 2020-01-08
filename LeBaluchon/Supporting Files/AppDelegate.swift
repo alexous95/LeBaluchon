@@ -13,6 +13,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // We use this methode to make the bar item that are not selected dark grey
         UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
        
         // Override point for customization after application launch.

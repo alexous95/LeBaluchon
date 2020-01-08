@@ -17,11 +17,13 @@ class TranslateController: UIViewController {
     @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var translatedText: UITextView!
     @IBOutlet weak var targetLanguage: UIButton!
-    
+        
     // MARK: - Variables
     
     var translation: Translate?
     var backGradient = CAGradientLayer()
+    var source = "en"
+    var target = "fr"
     
     // MARK: - View life cycle
     
@@ -39,7 +41,14 @@ class TranslateController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sourceSegue" {
-            
+            let destVC: LanguageController = segue.destination as! LanguageController
+            destVC.buttonSender = sourceLanguage.tag
+            destVC.delegate = self
+        }
+        if segue.identifier == "targetSegue" {
+            let destVC: LanguageController = segue.destination as! LanguageController
+            destVC.buttonSender = targetLanguage.tag
+            destVC.delegate = self
         }
     }
     // MARK: - Action
@@ -68,7 +77,13 @@ class TranslateController: UIViewController {
     /// This function is used to setup our view
     private func setupUI() {
         setupBackGradient()
-       
+        
+        sourceLanguage.setTitle(source, for: .normal)
+        targetLanguage.setTitle(target, for: .normal)
+        
+        sourceLanguage.tag = 1
+        targetLanguage.tag = 2
+    
         sourceLanguage.layer.borderColor = UIColor.white.cgColor
         textToTranslate.layer.borderColor = UIColor.white.cgColor
         translatedText.layer.borderColor = UIColor.white.cgColor
@@ -125,5 +140,22 @@ extension TranslateController: UITextViewDelegate {
             return false
         }
         return true
+    }
+}
+
+extension TranslateController: TransferDataProtocol {
+    
+    func languageBack(language: String, buttonTag: Int) {
+        switch buttonTag {
+        case 1:
+            print("On est dans le cas 1")
+            source = language
+            sourceLanguage.setTitle(language, for: .normal)
+        case 2:
+            target = language
+            targetLanguage.setTitle(language, for: .normal)
+        default:
+            print("On a un probleme")
+        }
     }
 }

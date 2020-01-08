@@ -11,6 +11,8 @@ import UIKit
 class LanguageController: UIViewController {
 
     var languageList: SupportedLanguages?
+    var delegate: TransferDataProtocol?
+    var buttonSender: Int?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -62,5 +64,12 @@ extension LanguageController: UITableViewDataSource, UITableViewDelegate {
         cell.detailTextLabel?.text = language
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let newLanguage = languageList?.data.languages[indexPath.row].language else { return }
+        guard let tag = buttonSender else { return }
+        delegate?.languageBack(language: newLanguage, buttonTag: tag)
+        dismiss(animated: true, completion: nil)
     }
 }

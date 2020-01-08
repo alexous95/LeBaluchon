@@ -10,7 +10,7 @@ import UIKit
 
 class ChangeRateController: UIViewController {
     
-    // MARK: - OUTLET
+    // MARK: - Outlet
     
     @IBOutlet weak var activityWheel: UIActivityIndicatorView!
     @IBOutlet weak var convertButton: UIButton!
