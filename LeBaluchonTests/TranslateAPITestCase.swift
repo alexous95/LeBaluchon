@@ -1,15 +1,14 @@
 //
-//  LeBaluchonTests.swift
+//  TranslateAPITestCase.swift
 //  LeBaluchonTests
 //
-//  Created by Alexandre Goncalves on 07/12/2019.
-//  Copyright © 2019 Alexandre Goncalves. All rights reserved.
+//  Created by Alexandre Goncalves on 08/01/2020.
+//  Copyright © 2020 Alexandre Goncalves. All rights reserved.
 //
 
 import XCTest
-@testable import LeBaluchon
 
-class LeBaluchonTests: XCTestCase {
+class TranslateAPITestCase: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -13,11 +13,30 @@ final class OpenWeatherAPI {
     /// Hold our URLSessionDataTask avoiding to create a task each time we do a request
     private var task: URLSessionDataTask?
     
+    /// This is our dependance injection to test our getCurrentWeather methode
+    private var currentWeatherSession = URLSession(configuration: .default)
+    
+    /// This is our dependance injection to test our getNYWeather methode
+    private var nyWeatherSession = URLSession(configuration: .default)
+    
+    /// This is our dependande injection to test our getWeatherIcon methode
+    private var iconSession = URLSession(configuration: .default)
+    
+    init(){
+    }
+    
+    convenience init(currentWeatherSession: URLSession, nyWeatherSession: URLSession, iconSession: URLSession) {
+        self.init()
+        self.currentWeatherSession = currentWeatherSession
+        self.nyWeatherSession = nyWeatherSession
+        self.iconSession = iconSession
+    }
+    
     /// Create a request from our url
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
     private func createNYWeatherRequest() -> URLRequest {
         guard let weatherNYUrl = URL(string: WeatherService.createNYStringRequest()) else {
-            preconditionFailure("Invalid request URL")
+            return URLRequest(url: URL(string: "")!)
         }
         var request = URLRequest(url: weatherNYUrl)
         request.httpMethod = "GET"
@@ -51,13 +70,13 @@ final class OpenWeatherAPI {
     func getCurrentWeather(lon: Double, lat: Double, completionHandler: @escaping ((OpenWeather?, Bool) -> Void)){
     
     let request = createCurrentWeatherRequest(lon: lon, lat: lat)
-    let session = URLSession(configuration: .default)
+    
     
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .secondsSince1970
     
     task?.cancel()
-    task = session.dataTask(with: request) { (data, response, error) in
+    task = currentWeatherSession.dataTask(with: request) { (data, response, error) in
         // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
         DispatchQueue.main.async {
             guard let jsonData = data, error == nil else {
@@ -105,14 +124,13 @@ final class OpenWeatherAPI {
     func getNYWeather(completionHandler: @escaping ((OpenWeather?, Bool) -> Void)) {
         
         let request = createNYWeatherRequest()
-        let session = URLSession(configuration: .default)
         
         /// Constant that hold our JSONDecoder
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
         
         task?.cancel()
-        task = session.dataTask(with: request) { (data, response, error) in
+        task = nyWeatherSession.dataTask(with: request) { (data, response, error) in
             // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
             DispatchQueue.main.async {
                 guard let jsonData = data, error == nil else {
@@ -144,10 +162,9 @@ final class OpenWeatherAPI {
     /// query operation was successful or not to the controller
     func getWeatherIcon(identifier: String, completionHandler: @escaping ((Data?, Bool) -> Void)) {
         let request = createIconRequest(with: identifier)
-        let session = URLSession(configuration: .default)
         
         task?.cancel()
-        task = session.dataTask(with: request) { (data, response, error) in
+        task = iconSession.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let imgData = data, error == nil else {
                     completionHandler(nil, false)
