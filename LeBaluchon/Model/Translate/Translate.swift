@@ -15,6 +15,7 @@ struct Translate: Codable {
         var translations: [TranslatedText]
         
         struct TranslatedText: Codable {
+            var detectedSourceLanguage: String
             var translatedText: String
         }
     }

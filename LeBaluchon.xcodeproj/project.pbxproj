@@ -18,6 +18,8 @@
 		FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */; };
 		FA5A15C823B6365200373B63 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15C723B6365200373B63 /* OpenWeather.swift */; };
 		FA5A15CC23B6373200373B63 /* OpenWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A15CB23B6373200373B63 /* OpenWeatherAPI.swift */; };
+		FA68656023C88508009779C3 /* FakeResponseTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68655F23C88508009779C3 /* FakeResponseTranslate.swift */; };
+		FA68656223C88810009779C3 /* Translate.json in Resources */ = {isa = PBXBuildFile; fileRef = FA68656123C88810009779C3 /* Translate.json */; };
 		FA6F187F23C74109008F15A1 /* WeatherCurrent.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6F187E23C74109008F15A1 /* WeatherCurrent.json */; };
 		FA97A63423C5DAF500FC19AC /* OpenWeatherAPITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA97A63323C5DAF500FC19AC /* OpenWeatherAPITestCase.swift */; };
 		FA97A63623C5DE8000FC19AC /* WeatherNY.json in Resources */ = {isa = PBXBuildFile; fileRef = FA97A63523C5DE8000FC19AC /* WeatherNY.json */; };
@@ -63,6 +65,8 @@
 		FA5A15BF23B6045F00373B63 /* ExchangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTableViewCell.swift; sourceTree = "<group>"; };
 		FA5A15C723B6365200373B63 /* OpenWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
 		FA5A15CB23B6373200373B63 /* OpenWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPI.swift; sourceTree = "<group>"; };
+		FA68655F23C88508009779C3 /* FakeResponseTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseTranslate.swift; sourceTree = "<group>"; };
+		FA68656123C88810009779C3 /* Translate.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Translate.json; sourceTree = "<group>"; };
 		FA6F187E23C74109008F15A1 /* WeatherCurrent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WeatherCurrent.json; sourceTree = "<group>"; };
 		FA97A63323C5DAF500FC19AC /* OpenWeatherAPITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPITestCase.swift; sourceTree = "<group>"; };
 		FA97A63523C5DE8000FC19AC /* WeatherNY.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WeatherNY.json; sourceTree = "<group>"; };
@@ -134,6 +138,16 @@
 			path = OpenWeather;
 			sourceTree = "<group>";
 		};
+		FA68655E23C884D3009779C3 /* Translate */ = {
+			isa = PBXGroup;
+			children = (
+				FA0B89A523C5CAE500417D1B /* TranslateAPITestCase.swift */,
+				FA68655F23C88508009779C3 /* FakeResponseTranslate.swift */,
+				FA68656123C88810009779C3 /* Translate.json */,
+			);
+			path = Translate;
+			sourceTree = "<group>";
+		};
 		FA97A63723C5DEA300FC19AC /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,10 +203,10 @@
 		FAB1B7B4239C192000243B7E /* LeBaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FA68655E23C884D3009779C3 /* Translate */,
 				FA99577E23C868A9001B928A /* Exchange */,
 				FA97A63723C5DEA300FC19AC /* OpenWeather */,
 				FAB1B7B7239C192000243B7E /* Info.plist */,
-				FA0B89A523C5CAE500417D1B /* TranslateAPITestCase.swift */,
 			);
 			path = LeBaluchonTests;
 			sourceTree = "<group>";
@@ -354,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA68656223C88810009779C3 /* Translate.json in Resources */,
 				FA99578323C86C71001B928A /* Exchange.json in Resources */,
 				FA6F187F23C74109008F15A1 /* WeatherCurrent.json in Resources */,
 				FA97A63623C5DE8000FC19AC /* WeatherNY.json in Resources */,
@@ -397,6 +412,7 @@
 			files = (
 				FA0B89A623C5CAE500417D1B /* TranslateAPITestCase.swift in Sources */,
 				FA99578123C8695D001B928A /* ExchangeAPITestCase.swift in Sources */,
+				FA68656023C88508009779C3 /* FakeResponseTranslate.swift in Sources */,
 				FA97A63423C5DAF500FC19AC /* OpenWeatherAPITestCase.swift in Sources */,
 				FA99578523C86D5E001B928A /* FakeResponseExchange.swift in Sources */,
 				FA97A63923C5DED800FC19AC /* FakeResponseWeather.swift in Sources */,

@@ -13,6 +13,14 @@ final class TranslateAPI {
     // MARK: - Variables
     
     private var task: URLSessionDataTask?
+    
+    private var session = URLSession(configuration: .default)
+    
+    convenience init(session: URLSession) {
+        self.init()
+        self.session = session
+    }
+    
     var tranlateText: String?
     var targetLanguage: String?
     var sourceLanguage: String?
@@ -103,7 +111,7 @@ final class TranslateAPI {
             completionHandler(nil, false)
             return
         }
-        let session = URLSession(configuration: .default)
+        
         let decoder = JSONDecoder()
         
         task?.cancel()
