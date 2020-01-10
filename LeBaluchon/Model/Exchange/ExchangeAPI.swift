@@ -22,7 +22,7 @@ final class ExchangeAPI {
     init(){}
     
     // The convenience init is used for our test class
-    convenience init(session: URLSessionFake) {
+    convenience init(session: URLSession) {
         self.init()
         self.session = session
     }
