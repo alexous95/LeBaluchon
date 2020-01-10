@@ -9,7 +9,7 @@
 import Foundation
 
 // This class is used to simulate a response from a network call
-class FakeResponseData {
+class FakeResponseWeather {
     
     // MARK: - Error
     
@@ -26,7 +26,7 @@ class FakeResponseData {
     
     static var weatherNYCorrectData: Data? {
         // This variable is used to retrieve the bundle in which the class we are using is located
-        let bundle = Bundle(for: FakeResponseData.self)
+        let bundle = Bundle(for: FakeResponseWeather.self)
         
         // This variable is used to get the url of our test json file
         let url = bundle.url(forResource: "WeatherNY", withExtension: "json")!
@@ -37,7 +37,7 @@ class FakeResponseData {
     
     static var weatherCurrentCorrectData: Data? {
         // This variable is used to retrieve the bundle in which the class we are using is located
-        let bundle = Bundle(for: FakeResponseData.self)
+        let bundle = Bundle(for: FakeResponseWeather.self)
         
         // This variable is used to get the url of our test json file
         let url = bundle.url(forResource: "WeatherCurrent", withExtension: "json")!

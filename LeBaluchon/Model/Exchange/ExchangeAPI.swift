@@ -13,8 +13,19 @@ final class ExchangeAPI {
     /// Hold our URLSessionDataTask avoiding to create a task each time we do a request
     private var task: URLSessionDataTask?
     
+    /// Hold our session to start network request
+    private var session = URLSession(configuration: .default)
+    
     /// Hold the URL of our API
     private let exchangeUrl = URL(string: Fixer.fixerUrl)!
+    
+    init(){}
+    
+    // The convenience init is used for our test class
+    convenience init(session: URLSessionFake) {
+        self.init()
+        self.session = session
+    }
     
     /// Create a request from our URL
     /// - Returns: A URLRequest from our Url and set http method to "GET"
@@ -33,7 +44,6 @@ final class ExchangeAPI {
     func getExchange(completionHandler: @escaping ((Exchange?, Bool) -> Void)) {
         
         let request = createExchangeRequest()
-        let session = URLSession(configuration: .default)
         
         /// Constant that hold our custom formatter that will be used in our JSONDecoder
         let formatter = DateFormatter()

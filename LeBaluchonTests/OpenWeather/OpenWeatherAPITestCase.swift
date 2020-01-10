@@ -29,7 +29,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         // Given
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseData.error),
+            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
@@ -71,7 +71,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         // Given
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseData.weatherNYCorrectData, urlResponse: FakeResponseData.responseKO, responseError: nil),
+            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
@@ -92,7 +92,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         // Given
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseData.weatherNYCorrectData, urlResponse: FakeResponseData.responseOK, responseError: nil),
+            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
@@ -113,7 +113,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         // Given
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseData.weatherNYCorrectData, urlResponse: FakeResponseData.responseOK, responseError: nil),
+            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
@@ -195,7 +195,7 @@ class OpenWeatherAPITestCase: XCTestCase {
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenFailCallbackIfError() {
         // Given
         let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseData.error),
+            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
@@ -237,7 +237,7 @@ class OpenWeatherAPITestCase: XCTestCase {
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenFailCallbackIfIncorrectUrlResponse() {
         // Given
         let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseData.weatherCurrentCorrectData, urlResponse: FakeResponseData.responseKO, responseError: nil),
+            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
@@ -258,7 +258,7 @@ class OpenWeatherAPITestCase: XCTestCase {
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenSuccessCallbackIfCorrectDataAndNoError() {
         // Given
         let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseData.weatherCurrentCorrectData, urlResponse: FakeResponseData.responseOK, responseError: nil),
+            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
@@ -279,7 +279,7 @@ class OpenWeatherAPITestCase: XCTestCase {
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenDataEqualsWeatherDataJson() {
         // Given
         let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseData.weatherCurrentCorrectData, urlResponse: FakeResponseData.responseOK, responseError: nil),
+            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
@@ -360,7 +360,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseData.error))
+            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
@@ -402,7 +402,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: FakeResponseData.weatherCurrentCorrectData, urlResponse: FakeResponseData.responseKO, responseError: nil))
+            iconSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
@@ -423,7 +423,7 @@ class OpenWeatherAPITestCase: XCTestCase {
         let weather = OpenWeatherAPI(
             currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
             nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: FakeResponseData.imgData, urlResponse: FakeResponseData.responseOK, responseError: nil))
+            iconSession: URLSessionFake(data: FakeResponseWeather.imgData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
