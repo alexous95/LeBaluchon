@@ -40,5 +40,21 @@ class TranslateAPITestCase: XCTestCase {
     }
     
     
+    func testGivenNilTranslate_WhenGettingTranslation_ThenCallbackFailIfNoData() {
+        // Given
+        let translate = TranslateAPI(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        
+        // When
+        let expectation = XCTestExpectation(description: "Waiting for queue change")
+        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translate, success) in
+            
+            // Then
+            XCTAssertNil(translate)
+            XCTAssertFalse(success)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
     
 }
