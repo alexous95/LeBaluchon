@@ -28,9 +28,17 @@ class FakeResponseTranslate {
         let bundle = Bundle(for: FakeResponseTranslate.self)
         
         // This variable is used to get the url of our test json file
-        let url = bundle.url(forResource: "translate", withExtension: "json")!
+        let url = bundle.url(forResource: "Translate", withExtension: "json")!
         
         // We retrieve the data inside the url
+        return try! Data(contentsOf: url)
+    }
+    
+    static var languageCorrectData: Data? {
+        let bundle = Bundle(for: FakeResponseTranslate.self)
+        
+        let url = bundle.url(forResource: "Language", withExtension: "json")!
+        
         return try! Data(contentsOf: url)
     }
 }

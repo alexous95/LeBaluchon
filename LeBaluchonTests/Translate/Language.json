@@ -1,0 +1,11 @@
+{
+    "data": {
+        "languages": [
+            { "language": "Afrikaans", "name": "af" },
+            { "language": "Albanian", "name": "sq" },
+            { "language": "French", "name": "fr" },
+            { "language": "English", "name": "en" },
+            { "language": "Spanish", "name": "es" }
+        ]
+    }
+}

@@ -142,8 +142,7 @@ final class TranslateAPI {
             completionHandler(nil, false)
             return
         }
-        
-        let session = URLSession(configuration: .default)
+    
         let decoder = JSONDecoder()
         
         task?.cancel()

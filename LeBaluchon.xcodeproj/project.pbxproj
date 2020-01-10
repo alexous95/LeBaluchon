@@ -32,6 +32,7 @@
 		FAB1B79E239C191D00243B7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1B79D239C191D00243B7E /* SceneDelegate.swift */; };
 		FAB1B7A3239C191D00243B7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB1B7A1239C191D00243B7E /* Main.storyboard */; };
 		FAB1B7AB239C191F00243B7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB1B7A9239C191F00243B7E /* LaunchScreen.storyboard */; };
+		FAB201F223C89F8B00694088 /* Language.json in Resources */ = {isa = PBXBuildFile; fileRef = FAB201F123C89F8B00694088 /* Language.json */; };
 		FAB39C7223B0DA5D009B102E /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB39C7123B0DA5D009B102E /* APIKeys.swift */; };
 		FAB7CBAF239F8DE600B4F47F /* ChangeRateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBAE239F8DE600B4F47F /* ChangeRateController.swift */; };
 		FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */; };
@@ -83,6 +84,7 @@
 		FAB1B7AC239C191F00243B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB1B7B1239C192000243B7E /* LeBaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeBaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB1B7B7239C192000243B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB201F123C89F8B00694088 /* Language.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Language.json; sourceTree = "<group>"; };
 		FAB39C7123B0DA5D009B102E /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FAB7CBAE239F8DE600B4F47F /* ChangeRateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeRateController.swift; sourceTree = "<group>"; };
 		FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				FA0B89A523C5CAE500417D1B /* TranslateAPITestCase.swift */,
 				FA68655F23C88508009779C3 /* FakeResponseTranslate.swift */,
 				FA68656123C88810009779C3 /* Translate.json */,
+				FAB201F123C89F8B00694088 /* Language.json */,
 			);
 			path = Translate;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB201F223C89F8B00694088 /* Language.json in Resources */,
 				FA68656223C88810009779C3 /* Translate.json in Resources */,
 				FA99578323C86C71001B928A /* Exchange.json in Resources */,
 				FA6F187F23C74109008F15A1 /* WeatherCurrent.json in Resources */,
