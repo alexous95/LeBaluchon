@@ -38,6 +38,7 @@ struct Coord: Codable {
 struct Main: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, humidity: Int
+    let seaLevel, grndLevel: Int?
     
     enum CodingKeys: String, CodingKey {
         case temp
@@ -45,6 +46,8 @@ struct Main: Codable {
         case tempMin = "temp_min"
         case tempMax = "temp_max"
         case pressure, humidity
+        case seaLevel = "sea_level"
+        case grndLevel = "grnd_level"
     }
 }
 
@@ -52,9 +55,10 @@ struct Main: Codable {
 
 struct Rain: Codable {
     let the1H: Double?
-    
+    let the3H: Double?
     enum CodingKeys: String, CodingKey {
         case the1H = "1h"
+        case the3H = "3h"
     }
 }
 

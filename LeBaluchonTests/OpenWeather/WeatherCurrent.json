@@ -1,0 +1,43 @@
+{
+    "coord": {
+        "lon": 2.24,
+        "lat": 48.88
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 284.92,
+        "feels_like": 281.16,
+        "temp_min": 283.71,
+        "temp_max": 286.15,
+        "pressure": 1013,
+        "humidity": 93
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 5.7,
+        "deg": 200
+    },
+    "clouds": {
+        "all": 90
+    },
+    "dt": 1578578225,
+    "sys": {
+        "type": 1,
+        "id": 6550,
+        "country": "FR",
+        "sunrise": 1578555774,
+        "sunset": 1578586347
+    },
+    "timezone": 3600,
+    "id": 2985034,
+    "name": "Puteaux",
+    "cod": 200
+}

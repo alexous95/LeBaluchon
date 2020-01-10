@@ -22,8 +22,7 @@ final class OpenWeatherAPI {
     /// This is our dependande injection to test our getWeatherIcon methode
     private var iconSession = URLSession(configuration: .default)
     
-    init(){
-    }
+    init(){}
     
     convenience init(currentWeatherSession: URLSession, nyWeatherSession: URLSession, iconSession: URLSession) {
         self.init()

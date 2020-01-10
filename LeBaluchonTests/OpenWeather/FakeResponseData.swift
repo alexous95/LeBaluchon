@@ -24,16 +24,29 @@ class FakeResponseData {
     
     // MARK: - Data
     
-    static var weatherCorrectData: Data? {
+    static var weatherNYCorrectData: Data? {
         // This variable is used to retrieve the bundle in which the class we are using is located
         let bundle = Bundle(for: FakeResponseData.self)
         
         // This variable is used to get the url of our test json file
-        let url = bundle.url(forResource: "Weather", withExtension: "json")!
+        let url = bundle.url(forResource: "WeatherNY", withExtension: "json")!
         
         // We retrieve the data inside the url
         return try! Data(contentsOf: url)
     }
     
+    static var weatherCurrentCorrectData: Data? {
+        // This variable is used to retrieve the bundle in which the class we are using is located
+        let bundle = Bundle(for: FakeResponseData.self)
+        
+        // This variable is used to get the url of our test json file
+        let url = bundle.url(forResource: "WeatherCurrent", withExtension: "json")!
+        
+        // We retrieve the data inside the url
+        return try! Data(contentsOf: url)
+    }
+
     static var weatherIncorrectData = "erreur".data(using: .utf8)!
+    
+    static let imgData = "10n".data(using: .utf8)
 }

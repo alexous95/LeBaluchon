@@ -64,9 +64,9 @@ extension DetailWeatherController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 3
+            return 5
         case 2:
-            return 1
+            return 2
         case 3:
             return 2
         case 4:
@@ -108,6 +108,10 @@ extension DetailWeatherController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(imageName: "Pressure", description: "Atmospheric pressure", value: "\(weather.main.pressure) hPa")
             case 2:
                 cell.configure(imageName: "Humidity", description: "Humidity", value: "\(weather.main.humidity)%")
+            case 3:
+                cell.configure(imageName: "Pressure", description: "Sea level pressure", value: "\(weather.main.seaLevel ?? 0) hPa")
+            case 4:
+                cell.configure(imageName: "Pressure", description: "Ground level pressure", value: "\(weather.main.grndLevel ?? 0) hPa")
             default:
                 return UITableViewCell()
             }
@@ -117,6 +121,8 @@ extension DetailWeatherController: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.configure(imageName: "Rain", description: "Precipitation last hour", value: "\(weather.rain?.the1H ?? 0.0) mm")
+            case 1:
+                cell.configure(imageName: "Rain", description: "Precipitation last 3 hours", value: "\(weather.rain?.the3H ?? 0.0) mm")
             default:
                 return UITableViewCell()
             }
