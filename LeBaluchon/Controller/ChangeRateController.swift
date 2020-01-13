@@ -176,9 +176,11 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
         }
         var arrayKey = Array(exchangeRates.keys)
         arrayKey.sort()
+        
         let currentKey = arrayKey[indexPath.row]
         let amount = getAmount()
         guard let exchangeRate = exchangeRates[currentKey] else { return cell }
+        
         if amount == -1 {
             cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * 1)))
         } else {

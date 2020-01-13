@@ -63,6 +63,9 @@ final class TranslateAPI {
         return nil
     }
     
+    /// Request for the language list from the google servers
+    ///
+    /// - Returns: An URLRequest with the parameters to get the language list
     private func createLanguageRequest() -> URLRequest? {
         var urlComponents = URLComponents()
         urlComponents.scheme = Google.scheme
@@ -81,6 +84,7 @@ final class TranslateAPI {
             let url = urlComponents.url ?? URL(fileURLWithPath: "")
             
             var request = URLRequest(url: url)
+            
             // Using a GET request with a body is impossible since ios 13 so the http methode is replaced by a post
             request.httpMethod = "POST"
             request.httpBody = body

@@ -34,6 +34,7 @@ class TranslateController: UIViewController {
         setupUI()
     }
     
+    // We use this methode to apply the dark mode 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backGradient.frame = view.bounds
@@ -177,6 +178,7 @@ extension TranslateController: UITextViewDelegate {
 
 extension TranslateController: TransferDataProtocol {
     
+    // Change the buttton from the selected language
     func languageBack(language: String, buttonTag: Int) {
         switch buttonTag {
         case 1:
