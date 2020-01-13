@@ -36,7 +36,43 @@ final class ExchangeAPI {
         return request
     }
     
-    
+    func getExchange2(base: String, completionHandler: @escaping ((Exchange?, Bool) -> Void)) {
+        guard let url = URL(string: Fixer.fixerUrl + "&" + base) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        /// Constant that hold our custom formatter that will be used in our JSONDecoder
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        /// Constant that hold our JSONDecoder
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
+        task?.cancel()
+        task = session.dataTask(with: request) { (data, response, error) in
+            // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
+            DispatchQueue.main.async {
+                guard let data = data, error == nil else {
+                    completionHandler(nil, false)
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    completionHandler(nil, false)
+                    return
+                }
+                do {
+                    let decoded = try decoder.decode(Exchange.self, from: data)
+                    completionHandler(decoded, true)
+                } catch {
+                    print("failed to decode")
+                    completionHandler(nil, false)
+                }
+            }
+        }
+        task?.resume()
+    }
     
     /// Request for json file from the API Fixer.IO
     ///

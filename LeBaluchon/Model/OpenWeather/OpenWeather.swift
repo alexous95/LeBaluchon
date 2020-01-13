@@ -7,7 +7,7 @@ struct OpenWeather: Codable {
     let weather: [Weather]
     let base: String
     let main: Main
-    let visibility: Int
+    let visibility: Int?
     let wind: Wind
     let snow: Snow?
     let rain: Rain?

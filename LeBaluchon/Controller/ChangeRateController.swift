@@ -18,6 +18,7 @@ class ChangeRateController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let gradient = CAGradientLayer()
+    var currentDevise = "EUR"
     
     // MARK: - Variables
     var exchangeRates: Exchange?

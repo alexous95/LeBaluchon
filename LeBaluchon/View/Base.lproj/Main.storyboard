@@ -113,6 +113,19 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Adk-dc-zc8">
                                 <rect key="frame" x="240" y="131" width="20" height="18"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-4f-E1w">
+                                <rect key="frame" x="325" y="58.666666666666657" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="gSC-39-B3S"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="wyP-NB-Av9"/>
+                                </constraints>
+                                <state key="normal" image="Settings">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eDB-tO-pJg" kind="presentation" id="wbc-ai-5zf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -123,8 +136,10 @@
                             <constraint firstItem="L01-qF-Jkw" firstAttribute="leading" secondItem="hml-k1-Yyn" secondAttribute="leading" constant="22" id="Hzq-6a-ngZ"/>
                             <constraint firstItem="3XJ-mF-r95" firstAttribute="top" secondItem="L01-qF-Jkw" secondAttribute="bottom" constant="10" id="IBH-qO-hZE"/>
                             <constraint firstItem="llg-Cg-E7D" firstAttribute="top" secondItem="JDO-mQ-sqB" secondAttribute="bottom" constant="40" id="ISS-1e-fEk"/>
+                            <constraint firstItem="uJJ-4f-E1w" firstAttribute="centerY" secondItem="L01-qF-Jkw" secondAttribute="centerY" id="IWo-Jr-iVH"/>
                             <constraint firstItem="hml-k1-Yyn" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L01-qF-Jkw" secondAttribute="trailing" symbolic="YES" id="KN3-tn-DSI"/>
                             <constraint firstItem="3XJ-mF-r95" firstAttribute="top" secondItem="JDO-mQ-sqB" secondAttribute="top" id="Qap-4q-hOn"/>
+                            <constraint firstItem="hml-k1-Yyn" firstAttribute="trailing" secondItem="uJJ-4f-E1w" secondAttribute="trailing" constant="10" id="QmD-UE-HpC"/>
                             <constraint firstItem="L01-qF-Jkw" firstAttribute="top" secondItem="hml-k1-Yyn" secondAttribute="top" id="RHU-6W-hkv"/>
                             <constraint firstItem="3XJ-mF-r95" firstAttribute="leading" secondItem="hml-k1-Yyn" secondAttribute="leading" constant="16" id="abv-XB-THE"/>
                             <constraint firstItem="llg-Cg-E7D" firstAttribute="leading" secondItem="hml-k1-Yyn" secondAttribute="leading" id="bXr-hQ-bUX"/>
@@ -146,6 +161,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOx-Jn-Rc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="-1381.0344827586207"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zZO-XV-HmS">
+            <objects>
+                <viewController id="eDB-tO-pJg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9NM-dj-mqY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7zw-2Z-Kz6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SoB-dY-maK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="622" y="-1381"/>
         </scene>
         <!--Weather-->
         <scene sceneID="3Kf-wD-Orp">
@@ -645,6 +675,7 @@
     </scenes>
     <resources>
         <image name="Language" width="25" height="25"/>
+        <image name="Settings" width="25" height="25"/>
         <image name="Swap" width="25" height="25"/>
         <image name="Transparent" width="0.5" height="0.5"/>
         <image name="icons8-échange-euro-50" width="25" height="25"/>

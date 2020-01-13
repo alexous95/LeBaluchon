@@ -33,6 +33,7 @@
 		FAB1B7A3239C191D00243B7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB1B7A1239C191D00243B7E /* Main.storyboard */; };
 		FAB1B7AB239C191F00243B7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB1B7A9239C191F00243B7E /* LaunchScreen.storyboard */; };
 		FAB201F223C89F8B00694088 /* Language.json in Resources */ = {isa = PBXBuildFile; fileRef = FAB201F123C89F8B00694088 /* Language.json */; };
+		FAB201F423CC94F600694088 /* SettingsExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB201F323CC94F600694088 /* SettingsExchangeController.swift */; };
 		FAB39C7223B0DA5D009B102E /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB39C7123B0DA5D009B102E /* APIKeys.swift */; };
 		FAB7CBAF239F8DE600B4F47F /* ChangeRateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBAE239F8DE600B4F47F /* ChangeRateController.swift */; };
 		FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */; };
@@ -85,6 +86,7 @@
 		FAB1B7B1239C192000243B7E /* LeBaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeBaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB1B7B7239C192000243B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB201F123C89F8B00694088 /* Language.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Language.json; sourceTree = "<group>"; };
+		FAB201F323CC94F600694088 /* SettingsExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExchangeController.swift; sourceTree = "<group>"; };
 		FAB39C7123B0DA5D009B102E /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FAB7CBAE239F8DE600B4F47F /* ChangeRateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeRateController.swift; sourceTree = "<group>"; };
 		FAB7CBB0239F8E5300B4F47F /* TranslateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				FAB7CBB2239F8E6800B4F47F /* WeatherController.swift */,
 				FA56193823BE07ED0098E35B /* DetailWeatherController.swift */,
 				FA0B89A023C4880300417D1B /* LanguageController.swift */,
+				FAB201F323CC94F600694088 /* SettingsExchangeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				FA0B899B23C32C7300417D1B /* TranslateAPI.swift in Sources */,
 				FAB7CBB1239F8E5300B4F47F /* TranslateController.swift in Sources */,
 				FAB39C7223B0DA5D009B102E /* APIKeys.swift in Sources */,
+				FAB201F423CC94F600694088 /* SettingsExchangeController.swift in Sources */,
 				FA56193B23BE0A790098E35B /* DetailWeatherCell.swift in Sources */,
 				FAB1B79E239C191D00243B7E /* SceneDelegate.swift in Sources */,
 				FACADA0623BA2C24008C002B /* WeatherService.swift in Sources */,
