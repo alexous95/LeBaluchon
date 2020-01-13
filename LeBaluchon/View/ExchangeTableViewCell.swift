@@ -15,6 +15,11 @@ class ExchangeTableViewCell: UITableViewCell {
     @IBOutlet weak var currencyName: UILabel!
     @IBOutlet weak var backView: UIView!
     
+    /// Methode to initialize the cells
+    ///
+    /// - Parameter countryName: The name of the image used to create an image from the assets
+    /// - Parameter moneyName: The 3 letters name for the money
+    /// - Parameter moneyValue: The value to display in the cell
     func configure(countryName: String, moneyName: String, moneyValue: String) {
         countryFlag.image = UIImage(named: countryName)
         currencyName.text = moneyName
@@ -22,6 +27,7 @@ class ExchangeTableViewCell: UITableViewCell {
         setupView()
     }
     
+    /// Methode to make our view rounded
     private func setupView() {
         backView.layer.cornerRadius = 20
     }

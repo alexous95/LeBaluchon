@@ -19,15 +19,6 @@ class URLSessionFake: URLSession {
         self.responseError = responseError
     }
     
-    override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        let task = URLSessionDataTaskFake()
-        task.completionHandler = completionHandler
-        task.data = data
-        task.urlResponse = urlResponse
-        task.responseError = responseError
-        return task
-    }
-    
     override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let task = URLSessionDataTaskFake()
         task.completionHandler = completionHandler
@@ -48,7 +39,4 @@ class URLSessionDataTaskFake: URLSessionDataTask {
     override func resume() {
         completionHandler?(data, urlResponse, responseError)
     }
-    
-    override func cancel() {}
-    
 }
