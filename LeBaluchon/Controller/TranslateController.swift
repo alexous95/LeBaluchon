@@ -17,7 +17,8 @@ class TranslateController: UIViewController {
     @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var translatedText: UITextView!
     @IBOutlet weak var targetLanguage: UIButton!
-        
+    @IBOutlet weak var swapButton: UIButton!
+    
     // MARK: - Variables
     
     var translation: Translate?
@@ -72,6 +73,14 @@ class TranslateController: UIViewController {
         }
     }
     
+    /// This action is used to swap the source and target languages
+    @IBAction func swapTranslation(sender: UIButton!) {
+        let tmp = source
+        source = target
+        target = tmp
+        updateButton(newSource: source, newTarget: target)
+    }
+    
     // MARK: - Private
     
     /// This function is used to setup our view
@@ -84,25 +93,48 @@ class TranslateController: UIViewController {
         sourceLanguage.tag = 1
         targetLanguage.tag = 2
     
+        setupBorderColor()
+        setupBorderWidth()
+        setupCornerRadius()
+    }
+    
+    /// Setup the border color for the UI elements
+    private func setupBorderColor() {
         sourceLanguage.layer.borderColor = UIColor.white.cgColor
         textToTranslate.layer.borderColor = UIColor.white.cgColor
         translatedText.layer.borderColor = UIColor.white.cgColor
         targetLanguage.layer.borderColor = UIColor.white.cgColor
         translateButton.layer.borderColor = UIColor.white.cgColor
-        
-        sourceLanguage.layer.cornerRadius = sourceLanguage.frame.height/2
-        targetLanguage.layer.cornerRadius = targetLanguage.frame.height/2
-        translateButton.layer.cornerRadius = 10
-        
+        swapButton.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    /// Setup the border width for the UI elements
+    private func setupBorderWidth() {
         sourceLanguage.layer.borderWidth = 1.0
         targetLanguage.layer.borderWidth = 1.0
         translateButton.layer.borderWidth = 1.0
         textToTranslate.layer.borderWidth = 1.0
         translatedText.layer.borderWidth = 1.0
-        
+        swapButton.layer.borderWidth = 1.0
+    }
+    
+    /// Setup the corner radius for the UI elements
+    private func setupCornerRadius() {
+        sourceLanguage.layer.cornerRadius = sourceLanguage.frame.height/2
+        targetLanguage.layer.cornerRadius = targetLanguage.frame.height/2
+        translateButton.layer.cornerRadius = 10
         textToTranslate.layer.cornerRadius = 10
         translatedText.layer.cornerRadius = 10
-        
+        swapButton.layer.cornerRadius = 10
+    }
+    
+    /// Update the target button and source button title
+    ///
+    /// - Parameter newSource: The new source language
+    /// - Parameter newTarget: The new target language
+    private func updateButton(newSource: String, newTarget: String) {
+        sourceLanguage.setTitle(newSource, for: .normal)
+        targetLanguage.setTitle(newTarget, for: .normal)
     }
     
     /// Creates two colors to make a gradient that will be used by the background view
@@ -148,7 +180,6 @@ extension TranslateController: TransferDataProtocol {
     func languageBack(language: String, buttonTag: Int) {
         switch buttonTag {
         case 1:
-            print("On est dans le cas 1")
             source = language
             sourceLanguage.setTitle(language, for: .normal)
         case 2:

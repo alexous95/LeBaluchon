@@ -51,12 +51,12 @@ class WeatherController: UIViewController {
         setupLocation()
     }
     
-    // Update the UI only when the view will appear
+    // Updates the UI only when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         getWeather()
     }
     
-    // We set the anew the frame of all gradients to update their appearence if the dark mode is triggered
+    // Sets anew the frame of all gradients to update their appearence if the dark mode is triggered
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientNY.frame = backViewNY.bounds
@@ -108,7 +108,7 @@ class WeatherController: UIViewController {
         }
     }
     
-    /// Assign to the variable openWeather the result from the request
+    /// Request the weather for New-York
     private func getWeather() {
         OpenWeatherAPI().getNYWeather { (weather, success) in
             if success {
@@ -120,6 +120,7 @@ class WeatherController: UIViewController {
         }
     }
     
+    /// Requests the weather for the current location
     private func getCurrentWeather() {
         guard let lon = lon, let lat = lat else { return }
         OpenWeatherAPI().getCurrentWeather(lon: lon, lat: lat) { (currentWeather, success) in
@@ -132,17 +133,25 @@ class WeatherController: UIViewController {
         }
     }
     
-    /// Configure the labels and the views
+    /// Configures the labels and the views
     private func setupUI() {
         setupBackGradient()
         setupWeatherGradient()
-        
+        setupLabelNY()
+        setupCurrentLabel()
+    }
+    
+    /// Setsup the text label for the New-York part
+    private func setupLabelNY() {
         cityLabelNY.text = ""
         tempLabelNY.text = ""
         maxTempNY.text = ""
         minTempNY.text = ""
         descriptionLabelNY.text = ""
-        
+    }
+    
+    /// Setsup the text label for the Current part
+    private func setupCurrentLabel() {
         cityLabelCurrent.text = ""
         tempLabelCurrent.text = ""
         maxTempCurrent.text = ""
