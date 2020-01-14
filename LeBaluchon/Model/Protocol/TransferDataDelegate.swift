@@ -8,6 +8,7 @@
 
 import Foundation
 
-protocol TransferDataProtocol {
+// This protocol is used to create a delegate and pass data between our controllers
+protocol TransferDataDelegate {
     func languageBack(language: String, buttonTag: Int)
 }

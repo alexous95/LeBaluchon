@@ -23,8 +23,8 @@ class TranslateController: UIViewController {
     
     var translation: Translate?
     var backGradient = CAGradientLayer()
-    var source = "en"
-    var target = "fr"
+    var source = "fr"
+    var target = "en"
     
     // MARK: - View life cycle
     
@@ -176,7 +176,7 @@ extension TranslateController: UITextViewDelegate {
     }
 }
 
-extension TranslateController: TransferDataProtocol {
+extension TranslateController: TransferDataDelegate {
     
     // Change the buttton from the selected language
     func languageBack(language: String, buttonTag: Int) {

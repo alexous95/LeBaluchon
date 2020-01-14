@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// The struct used to store the data from the JSON file
+/// The struct to decode the data from the JSON file
 struct Exchange: Codable {
     var success: Bool
     var base: String

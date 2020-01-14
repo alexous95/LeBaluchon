@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// The struct to decode a json response from the google translation request
 struct Translate: Codable {
     let data: Translation
     
@@ -20,6 +21,7 @@ struct Translate: Codable {
     }
 }
 
+/// The struct to decode a json response from the google language request
 struct SupportedLanguages: Codable {
     let data: LanguageSupportedList
     

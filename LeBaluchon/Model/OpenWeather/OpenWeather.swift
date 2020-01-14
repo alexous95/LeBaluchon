@@ -2,6 +2,8 @@
 import Foundation
 
 // MARK: - OpenWeather
+
+/// The struct used to decode a json response from an OpenWeather request
 struct OpenWeather: Codable {
     let coord: Coord
     let weather: [Weather]

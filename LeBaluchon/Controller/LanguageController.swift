@@ -11,7 +11,7 @@ import UIKit
 class LanguageController: UIViewController {
 
     var languageList: SupportedLanguages?
-    var delegate: TransferDataProtocol?
+    var delegate: TransferDataDelegate?
     var buttonSender: Int?
     
     @IBOutlet weak var tableView: UITableView!

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Struct that holds our adresses to create url from the fixer API
 struct Fixer {
     
     /// This constant represents our endpoint acces to the API
@@ -28,6 +29,7 @@ struct Fixer {
     
 }
 
+// Struct that holds our adresses to create url from the OpenWeather API
 struct OpenWeatherURL {
    
     static let endpoint = "https://api.openweathermap.org/data/2.5/weather"
@@ -35,6 +37,7 @@ struct OpenWeatherURL {
     
 }
 
+// Struct that holds our adresses to create url from the Google translate API
 struct Google {
     static let scheme = "https"
     static let host = "translation.googleapis.com"

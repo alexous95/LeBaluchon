@@ -36,8 +36,6 @@ final class ExchangeAPI {
         return request
     }
     
-    
-    
     /// Request for json file from the API Fixer.IO
     ///
     /// - parameter completionHandler: A closure with the type ( (Exchange?, Bool) -> Void) ) used to pass data to the controller

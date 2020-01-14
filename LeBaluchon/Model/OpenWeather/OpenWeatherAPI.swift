@@ -64,6 +64,7 @@ final class OpenWeatherAPI {
     /// controller
     /// - Parameter lon: The longitude of the current position
     /// - Parameter lat: The latitude of the current position
+    ///
     /// - This methode takes a closure as parameter to save and transmit an OpenWeather object and a boolean that indicate whether the
     /// query operation was successful or not to the controller
     func getCurrentWeather(lon: Double, lat: Double, completionHandler: @escaping ((OpenWeather?, Bool) -> Void)){
@@ -99,8 +100,11 @@ final class OpenWeatherAPI {
 }
     
     /// Create a request from our url
+    ///
     /// - Parameter identifier: A string from our model which hold the last part our request
+    ///
     /// - The url is the concatenation of our imgAdress from OpenWeatherURL struct, the icon identifier and the format
+    ///
     /// - Returns: A URLRequest from our URL and set the httpMethod to "GET"
     private func createIconRequest(with identifier: String) -> URLRequest {
         let image = OpenWeatherURL.imgAdress + identifier + "@2x.png"
@@ -157,7 +161,8 @@ final class OpenWeatherAPI {
     /// - parameter completionHandler: An escaping closure with the type ((Data?, Bool) -> Void)) used to pass data to the
     /// controller
     /// - parameter identifier: A string from our model which represents our icon
-    /// - This methode takes a closure as parameter to save and transmit an Data object and a boolean that indicate whether the
+    ///
+    /// - This methode takes a closure as parameter to save and transmit a Data object and a boolean that indicate whether the
     /// query operation was successful or not to the controller
     func getWeatherIcon(identifier: String, completionHandler: @escaping ((Data?, Bool) -> Void)) {
         let request = createIconRequest(with: identifier)

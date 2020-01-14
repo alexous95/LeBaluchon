@@ -23,7 +23,9 @@ class FakeResponseTranslate {
     
     // MARK: - Data
     
+    // Computed property that holds our data from the json file in our test bundle
     static var translateCorrectData: Data? {
+        
         // This variable is used to retrieve the bundle in which the class we are using is located
         let bundle = Bundle(for: FakeResponseTranslate.self)
         

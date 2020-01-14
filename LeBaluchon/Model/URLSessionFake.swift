@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// This class is used to test code in the test target.
+/// We use the fake model to test our network calls
 class URLSessionFake: URLSession {
     var data: Data?
     var urlResponse: URLResponse?
@@ -29,6 +31,7 @@ class URLSessionFake: URLSession {
     }
 }
 
+/// This class is used to test code in the test Target.
 class URLSessionDataTaskFake: URLSessionDataTask {
     var data: Data?
     var urlResponse: URLResponse?

@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // We use this methode to make the bar item that are not selected dark grey
         UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         
-        // We use this methode to change the TextField caret's color
+        // We use this methode to change the caret's TextField color
         UITextField.appearance().tintColor = UIColor.white
         
         // We use this to change the caret's textView color

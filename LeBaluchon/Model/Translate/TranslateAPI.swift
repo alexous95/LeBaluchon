@@ -13,20 +13,25 @@ final class TranslateAPI {
     // MARK: - Variables
     
     private var task: URLSessionDataTask?
-    
     private var session = URLSession(configuration: .default)
+    private var tranlateText: String?
+    private var targetLanguage: String?
+    private var sourceLanguage: String?
     
     convenience init(session: URLSession) {
         self.init()
         self.session = session
     }
     
-    var tranlateText: String?
-    var targetLanguage: String?
-    var sourceLanguage: String?
-    
     // MARK: - Private
     
+    /// Creates a request from the parameters passed to the function
+    ///
+    /// - Parameter textToTranslate: A string that hold the text to translate
+    /// - Parameter sourceLanguage: A string that hold the source language of the the text we want to translate
+    /// - Parameter targetLanguage: A string that hold the target language of the the text we want to translate
+    ///
+    /// - Returns: An URLRequest configured with the content type header for json file and a body created by the JsonSerialization of the parameters passed to the function
     private func createTranslateRequest(textToTranslate: String, sourceLanguage: String, targetLanguage: String) -> URLRequest? {
         var urlComponents = URLComponents()
         urlComponents.scheme = Google.scheme
@@ -108,6 +113,7 @@ final class TranslateAPI {
     /// - Parameter textToTranslate: The text we want to translate
     /// - Parameter sourceLanguage: The language of the text we want to translate
     /// - Parameter targetLanguage: The language that our text will be translated to
+    ///
     /// - This methode takes a closure as parameter to save and transmit an Translate object and a boolean that indicate whether the
     /// query operation was successful or not to the controller
     func getTranslation(textToTranslate: String, sourceLanguage: String, targetLanguage: String, completionHandler: @escaping (Translate?, Bool) -> Void) {
@@ -141,6 +147,13 @@ final class TranslateAPI {
         task?.resume()
     }
     
+    /// Request for json file from the API Google Cloud Translate
+    ///
+    /// - Parameter completionHandler: An escaping closure with the type ((SupportedLanguages?, Bool) -> Void)) used to pass data to the
+    /// controller
+    /// 
+    /// - This methode takes a closure as parameter to save and transmit an SupportedLanguages object and a boolean that indicate whether
+    ///the query operation was successful or not to the controller
     func getSupportedLanguages(completionHandler: @escaping (SupportedLanguages?, Bool) -> Void) {
         guard let request = createLanguageRequest() else {
             completionHandler(nil, false)
