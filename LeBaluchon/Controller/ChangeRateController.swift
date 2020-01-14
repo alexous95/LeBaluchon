@@ -17,12 +17,11 @@ class ChangeRateController: UIViewController {
     @IBOutlet weak var amountTF: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    let gradient = CAGradientLayer()
-    
     // MARK: - Variables
     
     var exchangeRates: Exchange?
-    
+    let gradient = CAGradientLayer()
+
     // MARK: - View Life cycle
     
     override func viewDidLoad() {
