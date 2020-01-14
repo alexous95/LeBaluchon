@@ -10,6 +10,8 @@ import Foundation
 
 final class ExchangeAPI {
     
+    // MARK: - Variables
+    
     /// Hold our URLSessionDataTask avoiding to create a task each time we do a request
     private var task: URLSessionDataTask?
     
@@ -18,14 +20,14 @@ final class ExchangeAPI {
     
     /// Hold the URL of our API
     private let exchangeUrl = URL(string: Fixer.fixerUrl)!
-    
-    init(){}
-    
+  
     // The convenience init is used for our test class
     convenience init(session: URLSession) {
         self.init()
         self.session = session
     }
+    
+    // MARK: - Private
     
     /// Create a request from our URL
     /// - Returns: A URLRequest from our Url and set http method to "GET"
@@ -35,6 +37,8 @@ final class ExchangeAPI {
         
         return request
     }
+    
+    // MARK: - Functions
     
     /// Request for json file from the API Fixer.IO
     ///

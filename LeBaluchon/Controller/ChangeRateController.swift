@@ -20,6 +20,7 @@ class ChangeRateController: UIViewController {
     let gradient = CAGradientLayer()
     
     // MARK: - Variables
+    
     var exchangeRates: Exchange?
     
     // MARK: - View Life cycle
@@ -37,7 +38,6 @@ class ChangeRateController: UIViewController {
         super.viewDidLayoutSubviews()
         gradient.frame = view.bounds
         setupUI()
-        
     }
     
     // MARK: - Actions
@@ -48,8 +48,10 @@ class ChangeRateController: UIViewController {
             showAlert(title: "Error", message: "You must enter a number to get the exchange rate")
             return
         }
+        
         updateInterface(isHidden: convertButton.isHidden)
         activityWheel.startAnimating()
+        
         ExchangeAPI().getExchange { (exchange, success) in
             if success {
                 self.exchangeRates = exchange
@@ -67,6 +69,7 @@ class ChangeRateController: UIViewController {
     // MARK: - Private methodes
     
     /// Get the amount choosen by the user
+    ///
     /// - Returns: A double wich holds the amount choosen by the user
     private func getAmount() -> Double {
         if let amountString = amountTF.text {
@@ -78,6 +81,7 @@ class ChangeRateController: UIViewController {
         return 1
     }
     
+    /// Get the change rate for one Euro
     private func getRatesForOne() {
         ExchangeAPI().getExchange { (exchange, success) in
             self.exchangeRates = exchange
@@ -86,6 +90,7 @@ class ChangeRateController: UIViewController {
     }
     
     /// Hides the convert button when a request is made and shows the activity wheel during the request
+    ///
     /// - Parameter isHidden: This parameter represents the state of the convertButton (hidden or not)
     private func updateInterface(isHidden: Bool) {
         activityWheel.isHidden = isHidden
@@ -184,9 +189,8 @@ extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
         if amount == -1 {
             cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * 1)))
         } else {
-            cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)) )
+            cell.configure(countryName: currentKey, moneyName: currentKey, moneyValue: String(format: "%.2F", (exchangeRate * amount)))
         }
         return cell
     }
-    
 }

@@ -10,6 +10,8 @@ import Foundation
 
 final class OpenWeatherAPI {
     
+    // MARK: - Variables
+    
     /// Hold our URLSessionDataTask avoiding to create a task each time we do a request
     private var task: URLSessionDataTask?
     
@@ -22,8 +24,6 @@ final class OpenWeatherAPI {
     /// This is our dependande injection to test our getWeatherIcon methode
     private var iconSession = URLSession(configuration: .default)
     
-    init(){}
-    
     convenience init(currentWeatherSession: URLSession, nyWeatherSession: URLSession, iconSession: URLSession) {
         self.init()
         self.currentWeatherSession = currentWeatherSession
@@ -31,7 +31,10 @@ final class OpenWeatherAPI {
         self.iconSession = iconSession
     }
     
+    // MARK: - Private
+    
     /// Create a request from our url
+    ///
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
     private func createNYWeatherRequest() -> URLRequest {
         guard let weatherNYUrl = URL(string: WeatherService.createNYStringRequest()) else {
@@ -44,8 +47,10 @@ final class OpenWeatherAPI {
     }
     
     /// Create a request from our url
+    ///
     /// - Parameter lon: The longitude of the current position
     /// - Parameter lat: The latitude of the position
+    ///
     /// - Returns: A URLRequest from our url and set the httpMethod to "GET"
     private func createCurrentWeatherRequest(lon: Double, lat: Double) -> URLRequest {
         guard let currentWeatherUrl = URL(string: WeatherService.createCurrentStringRequest(lon: lon, lat: lat)) else {
@@ -57,47 +62,6 @@ final class OpenWeatherAPI {
         
         return request
     }
-    
-    /// Request for json file from the API OpenWeather
-    ///
-    /// - Parameter completionHandler: An escaping closure with the type ((OpenWeather?, Bool) -> Void)) used to pass data to the
-    /// controller
-    /// - Parameter lon: The longitude of the current position
-    /// - Parameter lat: The latitude of the current position
-    ///
-    /// - This methode takes a closure as parameter to save and transmit an OpenWeather object and a boolean that indicate whether the
-    /// query operation was successful or not to the controller
-    func getCurrentWeather(lon: Double, lat: Double, completionHandler: @escaping ((OpenWeather?, Bool) -> Void)){
-    
-    let request = createCurrentWeatherRequest(lon: lon, lat: lat)
-    
-    
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .secondsSince1970
-    
-    task?.cancel()
-    task = currentWeatherSession.dataTask(with: request) { (data, response, error) in
-        // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
-        DispatchQueue.main.async {
-            guard let jsonData = data, error == nil else {
-                completionHandler(nil, false)
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completionHandler(nil, false)
-                return
-            }
-            do {
-                let decoded = try decoder.decode(OpenWeather.self, from: jsonData)
-                completionHandler(decoded, true)
-            } catch {
-                print(error)
-                completionHandler(nil, false)
-            }
-        }
-    }
-    task?.resume()
-}
     
     /// Create a request from our url
     ///
@@ -117,6 +81,47 @@ final class OpenWeatherAPI {
         return request
     }
     
+    // MARK: - Functions
+    
+    /// Request for json file from the API OpenWeather
+    ///
+    /// - Parameter completionHandler: An escaping closure with the type ((OpenWeather?, Bool) -> Void)) used to pass data to the
+    /// controller
+    /// - Parameter lon: The longitude of the current position
+    /// - Parameter lat: The latitude of the current position
+    ///
+    /// - This methode takes a closure as parameter to save and transmit an OpenWeather object and a boolean that indicate whether the
+    /// query operation was successful or not to the controller
+    func getCurrentWeather(lon: Double, lat: Double, completionHandler: @escaping ((OpenWeather?, Bool) -> Void)){
+        let request = createCurrentWeatherRequest(lon: lon, lat: lat)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        
+        task?.cancel()
+        task = currentWeatherSession.dataTask(with: request) { (data, response, error) in
+            // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
+            DispatchQueue.main.async {
+                guard let jsonData = data, error == nil else {
+                    completionHandler(nil, false)
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    completionHandler(nil, false)
+                    return
+                }
+                do {
+                    let decoded = try decoder.decode(OpenWeather.self, from: jsonData)
+                    completionHandler(decoded, true)
+                } catch {
+                    print(error)
+                    completionHandler(nil, false)
+                }
+            }
+        }
+        task?.resume()
+    }
+    
     /// Request for json file from the API OpenWeather
     ///
     /// - parameter completionHandler: An escaping closure with the type ((OpenWeather?, Bool) -> Void)) used to pass data to the
@@ -125,7 +130,6 @@ final class OpenWeatherAPI {
     /// - This methode takes a closure as parameter to save and transmit an OpenWeather object and a boolean that indicate whether the
     /// query operation was successful or not to the controller
     func getNYWeather(completionHandler: @escaping ((OpenWeather?, Bool) -> Void)) {
-        
         let request = createNYWeatherRequest()
         
         /// Constant that hold our JSONDecoder
