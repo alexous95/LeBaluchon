@@ -69,6 +69,7 @@ class TranslateController: UIViewController {
                 self.translation = translate
                 self.translatedText.text = self.translation?.data.translations[0].translatedText
             } else {
+                self.showAlert(title: "Oops", message: "An error occured. Please check your Wi-Fi network")
                 print("erreur")
             }
         }

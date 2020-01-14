@@ -60,7 +60,7 @@ class ChangeRateController: UIViewController {
                 self.activityWheel.stopAnimating()
                 self.view.endEditing(true)
             } else {
-                self.showAlert(title: "Error", message: "An error occured while retrieving the data")
+                self.showAlert(title: "Error", message: "An error occured. Please check your network connection")
                 print("error")
             }
         }
@@ -84,8 +84,12 @@ class ChangeRateController: UIViewController {
     /// Get the change rate for one Euro
     private func getRatesForOne() {
         ExchangeAPI().getExchange { (exchange, success) in
-            self.exchangeRates = exchange
-            self.tableView.reloadData()
+            if success {
+                self.exchangeRates = exchange
+                self.tableView.reloadData()
+            } else {
+                self.showAlert(title: "Oops", message:"An error occured. Please check your network connection")
+            }
         }
     }
     

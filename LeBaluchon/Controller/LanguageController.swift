@@ -10,11 +10,17 @@ import UIKit
 
 class LanguageController: UIViewController {
 
+    // MARK: - Variables
+    
     var languageList: SupportedLanguages?
     var delegate: TransferDataDelegate?
     var buttonSender: Int?
     
+    // MARK: - Outlet
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +29,22 @@ class LanguageController: UIViewController {
         getLanguages()
     }
     
+    // MARK: - Private
+    
+    /// This methode request for the Supported language from google API
     private func getLanguages() {
         TranslateAPI().getSupportedLanguages { (supportedList, success) in
             if success {
                 self.languageList = supportedList
                 self.tableView.reloadData()
             } else {
-                print("On a un probleme")
+                self.showAlert(title: "Oops", message: "An error occured. Please check your Wi-Fi network")
             }
         }
     }
 }
 
+// MARK: - Extension
 extension LanguageController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
