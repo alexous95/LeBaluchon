@@ -17,13 +17,17 @@ struct Fixer {
     static private let accessKey = "?access_key=\(APIKeys.FixerKey)"
     
     /// This constant represents our parameters for our query
-    static private let parameters = "&symbols=USD,JPY,GBP,AUD,CHF,EUR"
+    static let parameters = "&symbols=USD,JPY,GBP,AUD,CHF,EUR"
     
     /// The complete URL for accessing data
     ///
     /// - Returns: - The URL to access our data
     static var fixerUrl : String {
         return endPoint + accessKey + parameters
+    }
+    
+    static var fixerBase: String {
+        return endPoint + accessKey
     }
     
 }

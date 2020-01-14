@@ -25,6 +25,12 @@ class ChangeRateController: UIViewController {
     
     // MARK: - View Life cycle
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "settingsExchange" {
+            let destVC: SettingsExchangeController = segue.destination as! SettingsExchangeController
+            destVC.delegate = self
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,7 +43,7 @@ class ChangeRateController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradient.frame = view.bounds
-        setupUI()
+        setupGradient()
         
     }
     
@@ -81,8 +87,25 @@ class ChangeRateController: UIViewController {
     
     private func getRatesForOne() {
         ExchangeAPI().getExchange { (exchange, success) in
-            self.exchangeRates = exchange
-            self.tableView.reloadData()
+            if success {
+                self.exchangeRates = exchange
+                self.tableView.reloadData()
+            } else {
+                self.showAlert(title: "Oops", message: "There was a probleme loading the exchange rates. Please check your internet connection")
+            }
+        }
+    }
+    
+    private func getNewRates() {
+        ExchangeAPI().getExchange2(base: currentDevise) { (exchange, success) in
+            if success {
+                print("On est la ")
+                self.exchangeRates = exchange
+                self.tableView.reloadData()
+            } else {
+                print("On s'est foiré")
+                self.showAlert(title: "Oops", message: "There was an error")
+            }
         }
     }
     
@@ -125,15 +148,8 @@ class ChangeRateController: UIViewController {
             guard let startColor = UIColor(named: "StartColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
             guard let endColor = UIColor(named: "EndColorExchange")?.resolvedColor(with: self.traitCollection) else { return }
             
-            
             gradient.colors = [startColor.cgColor, endColor.cgColor]
             view.layer.insertSublayer(gradient, at: 0)
-            
-            convertButton.layer.borderColor = UIColor.white.cgColor
-            convertButton.layer.borderWidth = 1.0
-            
-            amountTF.layer.borderColor = UIColor.white.cgColor
-            amountTF.layer.borderWidth = 1.0
             
         } else {
             guard let startColor = UIColor(named: "StartColorExchange") else { return }
@@ -153,6 +169,13 @@ extension ChangeRateController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+extension ChangeRateController: TransferDeviseDelegate {
+    func deviseBack(_ devise: String) {
+        self.currentDevise = devise
+        getNewRates()
     }
 }
 

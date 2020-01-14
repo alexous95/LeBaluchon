@@ -37,7 +37,7 @@ final class ExchangeAPI {
     }
     
     func getExchange2(base: String, completionHandler: @escaping ((Exchange?, Bool) -> Void)) {
-        guard let url = URL(string: Fixer.fixerUrl + "&" + base) else { return }
+        guard let url = URL(string: Fixer.fixerBase + "&base=" + base + Fixer.parameters) else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -67,6 +67,7 @@ final class ExchangeAPI {
                     completionHandler(decoded, true)
                 } catch {
                     print("failed to decode")
+                    print(error)
                     completionHandler(nil, false)
                 }
             }

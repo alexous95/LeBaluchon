@@ -123,7 +123,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="eDB-tO-pJg" kind="presentation" id="wbc-ai-5zf"/>
+                                    <segue destination="eDB-tO-pJg" kind="presentation" identifier="settingsExchange" id="wbc-ai-5zf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -162,20 +162,62 @@
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="-1381.0344827586207"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings Exchange Controller-->
         <scene sceneID="zZO-XV-HmS">
             <objects>
-                <viewController id="eDB-tO-pJg" sceneMemberID="viewController">
+                <viewController id="eDB-tO-pJg" customClass="SettingsExchangeController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9NM-dj-mqY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idv-X2-Cd3">
+                                <rect key="frame" x="22.000000000000007" y="50" width="120.66666666666669" height="40.666666666666657"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Testing" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtI-K0-Wx9">
+                                <rect key="frame" x="290" y="120.66666666666669" width="75" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="OVM-Dc-dIy"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New base" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhC-yp-fs4">
+                                <rect key="frame" x="10" y="120.66666666666669" width="75.666666666666671" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0Ce-fy-qde"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="8u3-uV-MT1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WhC-yp-fs4" firstAttribute="leading" secondItem="7zw-2Z-Kz6" secondAttribute="leading" constant="10" id="4vh-a1-E8v"/>
+                            <constraint firstItem="Idv-X2-Cd3" firstAttribute="leading" secondItem="7zw-2Z-Kz6" secondAttribute="leading" constant="22" id="8s3-x4-kqe"/>
+                            <constraint firstItem="7zw-2Z-Kz6" firstAttribute="trailing" secondItem="dtI-K0-Wx9" secondAttribute="trailing" constant="10" id="ARd-T2-Rle"/>
+                            <constraint firstItem="dtI-K0-Wx9" firstAttribute="top" secondItem="Idv-X2-Cd3" secondAttribute="bottom" constant="30" id="K5I-6a-xBq"/>
+                            <constraint firstItem="dtI-K0-Wx9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WhC-yp-fs4" secondAttribute="trailing" constant="8" symbolic="YES" id="QG0-0C-Dxa"/>
+                            <constraint firstItem="WhC-yp-fs4" firstAttribute="top" secondItem="Idv-X2-Cd3" secondAttribute="bottom" constant="30" id="Qh6-VL-ETk"/>
+                            <constraint firstItem="Idv-X2-Cd3" firstAttribute="top" secondItem="7zw-2Z-Kz6" secondAttribute="top" constant="50" id="wxP-kf-QBa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7zw-2Z-Kz6"/>
                     </view>
+                    <connections>
+                        <outlet property="newDeviseTF" destination="dtI-K0-Wx9" id="TAU-sw-cYj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SoB-dY-maK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="622" y="-1381"/>
+            <point key="canvasLocation" x="621.60000000000002" y="-1381.0344827586207"/>
         </scene>
         <!--Weather-->
         <scene sceneID="3Kf-wD-Orp">
