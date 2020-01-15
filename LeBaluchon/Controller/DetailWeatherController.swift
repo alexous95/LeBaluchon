@@ -18,13 +18,29 @@ class DetailWeatherController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var quitButton: UIButton!
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButton()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setupButton() {
+        if #available(iOS 13.0, *) {
+            quitButton.isHidden = true
+        } else {
+            quitButton.layer.cornerRadius = quitButton.bounds.height/2
+            quitButton.layer.borderColor = UIColor.black.cgColor
+            quitButton.layer.borderWidth = 1.0
+        }
+    }
+    
+    @IBAction func dismiss(sender: UIButton!) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

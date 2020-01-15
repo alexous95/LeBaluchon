@@ -10,27 +10,6 @@ import Foundation
 
 final class OpenWeatherAPI {
     
-    // MARK: - Variables
-    
-    /// Hold our URLSessionDataTask avoiding to create a task each time we do a request
-    private var task: URLSessionDataTask?
-    
-    /// This is our dependance injection to test our getCurrentWeather methode
-    private var currentWeatherSession = URLSession(configuration: .default)
-    
-    /// This is our dependance injection to test our getNYWeather methode
-    private var nyWeatherSession = URLSession(configuration: .default)
-    
-    /// This is our dependande injection to test our getWeatherIcon methode
-    private var iconSession = URLSession(configuration: .default)
-    
-    convenience init(currentWeatherSession: URLSession, nyWeatherSession: URLSession, iconSession: URLSession) {
-        self.init()
-        self.currentWeatherSession = currentWeatherSession
-        self.nyWeatherSession = nyWeatherSession
-        self.iconSession = iconSession
-    }
-    
     // MARK: - Private
     
     /// Create a request from our url
@@ -95,31 +74,15 @@ final class OpenWeatherAPI {
     func getCurrentWeather(lon: Double, lat: Double, completionHandler: @escaping ((OpenWeather?, Bool) -> Void)){
         let request = createCurrentWeatherRequest(lon: lon, lat: lat)
         
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        
-        task?.cancel()
-        task = currentWeatherSession.dataTask(with: request) { (data, response, error) in
-            // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
-            DispatchQueue.main.async {
-                guard let jsonData = data, error == nil else {
-                    completionHandler(nil, false)
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completionHandler(nil, false)
-                    return
-                }
-                do {
-                    let decoded = try decoder.decode(OpenWeather.self, from: jsonData)
-                    completionHandler(decoded, true)
-                } catch {
-                    print(error)
-                    completionHandler(nil, false)
-                }
+        RequestManager().launch(request: request, api: .openWeather) { (data, success) in
+            if success {
+                guard let currentWeather = data as! OpenWeather? else { return }
+                completionHandler(currentWeather, success)
+            }
+            else {
+                print("Ca marche pas c'est nul")
             }
         }
-        task?.resume()
     }
     
     /// Request for json file from the API OpenWeather
@@ -132,32 +95,15 @@ final class OpenWeatherAPI {
     func getNYWeather(completionHandler: @escaping ((OpenWeather?, Bool) -> Void)) {
         let request = createNYWeatherRequest()
         
-        /// Constant that hold our JSONDecoder
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        
-        task?.cancel()
-        task = nyWeatherSession.dataTask(with: request) { (data, response, error) in
-            // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
-            DispatchQueue.main.async {
-                guard let jsonData = data, error == nil else {
-                    completionHandler(nil, false)
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completionHandler(nil, false)
-                    return
-                }
-                do {
-                    let decoded = try decoder.decode(OpenWeather.self, from: jsonData)
-                    completionHandler(decoded, true)
-                } catch {
-                    print(error)
-                    completionHandler(nil, false)
-                }
+        RequestManager().launch(request: request, api: .openWeather) { (data, success) in
+            if success {
+                guard let nyWeather = data as! OpenWeather? else { return }
+                completionHandler(nyWeather, success)
+            }
+            else {
+                print("Ca marche pas c'est nul")
             }
         }
-        task?.resume()
     }
     
     /// Request for an icon from the API OpenWeather
@@ -171,20 +117,14 @@ final class OpenWeatherAPI {
     func getWeatherIcon(identifier: String, completionHandler: @escaping ((Data?, Bool) -> Void)) {
         let request = createIconRequest(with: identifier)
         
-        task?.cancel()
-        task = iconSession.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                guard let imgData = data, error == nil else {
-                    completionHandler(nil, false)
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completionHandler(nil, false)
-                    return
-                }
-                completionHandler(imgData, true)
+        RequestManager().launch(request: request, api: .image) { (data, success) in
+            if success {
+                guard let imgData = data as! Data? else { return }
+                completionHandler(imgData, success)
+            }
+            else {
+                print("Ca marche pas c'est nul")
             }
         }
-        task?.resume()
     }
 }

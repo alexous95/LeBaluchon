@@ -199,7 +199,8 @@ class WeatherController: UIViewController {
             
         } else {
             guard let startColor = UIColor(named: "BackgroundStart") else { return }
-            guard let endColor = UIColor(named: "BackgoundEnd") else { return }
+            guard let endColor = UIColor(named: "BackgroundEnd") else { return }
+            
             let backGradient = CAGradientLayer()
             
             backGradient.frame = view.bounds

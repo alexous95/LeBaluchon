@@ -150,8 +150,8 @@ class TranslateController: UIViewController {
             view.layer.insertSublayer(backGradient, at: 0)
             
         } else {
-            guard let startColor = UIColor(named: "BackgroundStart") else { return }
-            guard let endColor = UIColor(named: "BackgoundEnd") else { return }
+            guard let startColor = UIColor(named: "StartColorExchange") else { return }
+            guard let endColor = UIColor(named: "EndColorExchange") else { return }
             let backGradient = CAGradientLayer()
             
             backGradient.frame = view.bounds

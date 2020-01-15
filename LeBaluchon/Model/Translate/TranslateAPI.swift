@@ -10,19 +10,6 @@ import Foundation
 
 final class TranslateAPI {
     
-    // MARK: - Variables
-    
-    private var task: URLSessionDataTask?
-    private var session = URLSession(configuration: .default)
-    private var tranlateText: String?
-    private var targetLanguage: String?
-    private var sourceLanguage: String?
-    
-    convenience init(session: URLSession) {
-        self.init()
-        self.session = session
-    }
-    
     // MARK: - Private
     
     /// Creates a request from the parameters passed to the function
@@ -122,29 +109,15 @@ final class TranslateAPI {
             return
         }
         
-        let decoder = JSONDecoder()
-        
-        task?.cancel()
-        task = session.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                guard let jsonData = data, error == nil else {
-                    completionHandler(nil, false)
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 || response.statusCode == 201 else {
-                    completionHandler(nil, false)
-                    return
-                }
-                do {
-                    let decoded = try decoder.decode(Translate.self, from: jsonData)
-                    completionHandler(decoded, true)
-                } catch {
-                    print(error)
-                    completionHandler(nil, false)
-                }
+        RequestManager().launch(request: request, api: .google) { (data, success) in
+            if success {
+                guard let translate = data as! Translate? else { return }
+                completionHandler(translate, success)
+            }
+            else {
+                debugPrint("Ca marche pas c'est nul")
             }
         }
-        task?.resume()
     }
     
     /// Request for json file from the API Google Cloud Translate
@@ -160,28 +133,14 @@ final class TranslateAPI {
             return
         }
     
-        let decoder = JSONDecoder()
-        
-        task?.cancel()
-        task = session.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                guard let jsonData = data, error == nil else {
-                    completionHandler(nil, false)
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 || response.statusCode == 201 else {
-                    completionHandler(nil, false)
-                    return
-                }
-                do {
-                    let decoded = try decoder.decode(SupportedLanguages.self, from: jsonData)
-                    completionHandler(decoded, true)
-                } catch {
-                    print(error)
-                    completionHandler(nil, false)
-                }
+        RequestManager().launch(request: request, api: .language) { (data, success) in
+            if success {
+                guard let languages = data as! SupportedLanguages? else { return }
+                completionHandler(languages, success)
+            }
+            else {
+                debugPrint("Ca marche pas c'est nul")
             }
         }
-        task?.resume()
-    }
+}
 }

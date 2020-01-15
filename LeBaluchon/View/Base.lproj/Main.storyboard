@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m6B-aI-Apo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m6B-aI-Apo">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -217,7 +216,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="BackColor"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="N5u-At-X42" firstAttribute="leading" secondItem="yMb-mc-2EA" secondAttribute="leading" constant="8" id="1Ql-Is-du1"/>
                                     <constraint firstItem="Cjl-WZ-FNS" firstAttribute="top" secondItem="n6N-JO-pnj" secondAttribute="bottom" constant="5" id="8ER-ra-Xe5"/>
@@ -308,7 +307,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="BackColor"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="90J-j1-T6h" firstAttribute="leading" secondItem="8Xw-zN-rOo" secondAttribute="trailing" constant="10" id="1dM-18-fac"/>
                                     <constraint firstItem="NeT-vT-ScK" firstAttribute="centerY" secondItem="7Kq-tk-eaZ" secondAttribute="centerY" id="37i-RH-ce2"/>
@@ -434,17 +433,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdU-c3-FCm">
+                                <rect key="frame" x="167.66666666666666" y="674" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="QTY-mU-mqJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="t3V-PK-cva"/>
+                                </constraints>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissWithSender:" destination="FSt-Wg-iw6" eventType="touchUpInside" id="ksY-bT-B6V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="qdU-c3-FCm" firstAttribute="centerX" secondItem="PZ4-ws-wFV" secondAttribute="centerX" id="0U6-tT-2Sy"/>
                             <constraint firstItem="pjc-QV-1Zd" firstAttribute="bottom" secondItem="O9r-GU-Rl6" secondAttribute="bottom" id="OG5-5W-oUn"/>
                             <constraint firstItem="O9r-GU-Rl6" firstAttribute="leading" secondItem="pjc-QV-1Zd" secondAttribute="leading" id="Qqw-oi-lya"/>
                             <constraint firstItem="pjc-QV-1Zd" firstAttribute="trailing" secondItem="O9r-GU-Rl6" secondAttribute="trailing" id="jMf-Mw-eHM"/>
                             <constraint firstItem="O9r-GU-Rl6" firstAttribute="top" secondItem="pjc-QV-1Zd" secondAttribute="top" id="rzf-Ft-iSB"/>
+                            <constraint firstItem="pjc-QV-1Zd" firstAttribute="bottom" secondItem="qdU-c3-FCm" secondAttribute="bottom" constant="10" id="xFA-xd-8CT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pjc-QV-1Zd"/>
                     </view>
                     <connections>
+                        <outlet property="quitButton" destination="qdU-c3-FCm" id="vNh-Ax-ihh"/>
                         <outlet property="tableView" destination="O9r-GU-Rl6" id="vVK-sn-S52"/>
                     </connections>
                 </viewController>
@@ -649,9 +664,6 @@
         <image name="Transparent" width="0.5" height="0.5"/>
         <image name="icons8-échange-euro-50" width="25" height="25"/>
         <image name="icons8-thermomètre-automatique-50" width="25" height="25"/>
-        <namedColor name="BackColor">
-            <color red="0.39215686274509803" green="0.78431372549019607" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fcg-rE-2te"/>
