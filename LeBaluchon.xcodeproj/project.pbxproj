@@ -242,12 +242,12 @@
 		FAB1B7C2239C19D500243B7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAD1F2EC23CF1DB700312969 /* RequestManager.swift */,
 				FA97A63A23C5E5AD00FC19AC /* URLSessionFake.swift */,
 				FA0B89A223C4EC2D00417D1B /* Protocol */,
 				FAF8AF3C23BF9C6F00D7B113 /* Translate */,
 				FA5A15C923B636CE00373B63 /* Exchange */,
 				FA5A15CA23B636E000373B63 /* OpenWeather */,
-				FAD1F2EC23CF1DB700312969 /* RequestManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
