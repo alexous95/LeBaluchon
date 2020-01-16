@@ -33,8 +33,11 @@ class LanguageController: UIViewController {
     
     /// This methode request for the Supported language from google API
     private func getLanguages() {
-        TranslateAPI().getSupportedLanguages { (supportedList, success) in
+        guard let request = TranslateAPI().createLanguageRequest() else { return }
+        
+        RequestManager().launch(request: request, api: .language) { (data, success) in
             if success {
+                guard let supportedList = data as! SupportedLanguages? else { return }
                 self.languageList = supportedList
                 self.tableView.reloadData()
             } else {

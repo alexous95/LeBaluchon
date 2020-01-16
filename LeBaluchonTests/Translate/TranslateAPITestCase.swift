@@ -14,11 +14,13 @@ class TranslateAPITestCase: XCTestCase {
     var text: String!
     var source: String!
     var target: String!
+    var requestTranslate: URLRequest!
     
     override func setUp() {
         text = "Hello, world"
         source = "en"
         target = "fr"
+        requestTranslate = TranslateAPI().createTranslateRequest(textToTranslate: text, sourceLanguage: source, targetLanguage: target)
     }
 
     // MARK: - Test GetTranslation
@@ -26,32 +28,26 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there is an error in getTranslation
     func testGivenNilTranslate_WhenGettingTranslation_ThenCallbackFailIfError() {
         // Given
-        let translate = TranslateAPI(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseTranslate.error))
+        let translate = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseTranslate.error))
         
         // When
-        let expectation = XCTestExpectation(description: "Waiting for queue change")
-        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translate, success) in
-            
-            // Then
-            XCTAssertNil(translate)
+        translate.launch(request: requestTranslate, api: .google) { (data, success) in
+             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 0.01)
     }
     
     /// Test case where there is no data in getTranslation
     func testGivenNilTranslate_WhenGettingTranslation_ThenCallbackFailIfNoData() {
         // Given
-        let translate = TranslateAPI(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let translate = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translate, success) in
-            
+        translate.launch(request: requestTranslate, api: .google) { (data, success) in
             // Then
-            XCTAssertNil(translate)
+            XCTAssertNil(data)
             XCTAssertFalse(success)
             expectation.fulfill()
         }
@@ -62,31 +58,29 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there is an incorrect url response in getTranslation
     func testGivenNilTranslate_WhenGettingTranslation_ThenCallbackFailIfIncorrectUrlResponse() {
         // Given
-        let translate = TranslateAPI(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseKO, responseError: nil))
+        let translate = RequestManager(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translate, success) in
-            
+        translate.launch(request: requestTranslate, api: .google) { (data, success) in
             // Then
-            XCTAssertNil(translate)
+            XCTAssertNil(data)
             XCTAssertFalse(success)
             expectation.fulfill()
         }
-        
         wait(for: [expectation], timeout: 0.01)
     }
     
     /// Test case where there the data is successfuly retrieved and url response is correct in getExchange
     func testGivenNilTranslate_WhenGettingTranslation_ThenSuccessCallbackIfCorrectDataAndNoError() {
         // Given
-        let translate = TranslateAPI(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
+        let translate = RequestManager(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translation, success) in
+        translate.launch(request: requestTranslate, api: .google) { (data, success) in
             // Then
-            XCTAssertNotNil(translation)
+            XCTAssertNotNil(data)
             XCTAssertTrue(success)
             expectation.fulfill()
         }
@@ -98,20 +92,20 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there the data is successfuly retrieved and url response is correct in getExchange
     func testGivenNilTranslate_WhenGettingTranslation_ThenTranslationEqualsJsonData() {
         // Given
-        let translate = TranslateAPI(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
+        let translate = RequestManager(session: URLSessionFake(data: FakeResponseTranslate.translateCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        translate.getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translation, success) in
+        translate.launch(request: requestTranslate, api: .google) { (data, success) in
             // Then
-            XCTAssertNotNil(translation)
+            XCTAssertNotNil(data)
             XCTAssertTrue(success)
+            guard let translation = data as! Translate? else { return }
             
-            XCTAssertEqual("Bonjour, monde", translation!.data.translations[0].translatedText)
+            XCTAssertEqual("Bonjour, monde", translation.data.translations[0].translatedText)
             
             expectation.fulfill()
         }
-        
         wait(for: [expectation], timeout: 0.01)
     }
     
@@ -120,14 +114,13 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there is an error in getTranslation
     func testGivenNilLanguage_WhenGettingLanguage_ThenCallbackFailIfError() {
         // Given
-        let language = TranslateAPI(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseTranslate.error))
+       let language = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseTranslate.error))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.getSupportedLanguages { (languages, success) in
-            
+        language.launch(request: requestTranslate, api: .language) { (data, success) in
             // Then
-            XCTAssertNil(languages)
+            XCTAssertNil(data)
             XCTAssertFalse(success)
             expectation.fulfill()
         }
@@ -139,14 +132,13 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there is no data in getTranslation
     func testGivenNilLanguage_WhenGettingLanguage_ThenCallbackFailIfNoData() {
         // Given
-        let language = TranslateAPI(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
-        
+        let language = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+    
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.getSupportedLanguages { (languages, success) in
-            
+        language.launch(request: requestTranslate, api: .language) { (data, success) in
             // Then
-            XCTAssertNil(languages)
+            XCTAssertNil(data)
             XCTAssertFalse(success)
             expectation.fulfill()
         }
@@ -157,14 +149,13 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where there is an incorrect url response in getTranslation
     func testGivenNilLanguage_WhenGettingLanguage_ThenCallbackFailIfIncorrectUrlResponse() {
         // Given
-        let language = TranslateAPI(session: URLSessionFake(data: FakeResponseTranslate.languageCorrectData, urlResponse: FakeResponseTranslate.responseKO, responseError: nil))
+        let language = RequestManager(session: URLSessionFake(data: FakeResponseTranslate.languageCorrectData, urlResponse: FakeResponseTranslate.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.getSupportedLanguages { (languages, success) in
-            
+        language.launch(request: requestTranslate, api: .language) { (data, success) in
             // Then
-            XCTAssertNil(languages)
+            XCTAssertNil(data)
             XCTAssertFalse(success)
             expectation.fulfill()
         }
@@ -175,13 +166,13 @@ class TranslateAPITestCase: XCTestCase {
     /// Test case where the data is successfuly retrieved and url response is correct in getExchange
     func testGivenNilLanguage_WhenGettingLanguage_ThenSuccessCallbackIfCorrectDataAndNoError() {
         // Given
-        let language = TranslateAPI(session: URLSessionFake(data: FakeResponseTranslate.languageCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
+        let language = RequestManager(session: URLSessionFake(data: FakeResponseTranslate.languageCorrectData, urlResponse: FakeResponseTranslate.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.getSupportedLanguages { (languages, success) in
+        language.launch(request: requestTranslate, api: .language) { (data, success) in
             // Then
-            XCTAssertNotNil(languages)
+            XCTAssertNotNil(data)
             XCTAssertTrue(success)
             expectation.fulfill()
         }

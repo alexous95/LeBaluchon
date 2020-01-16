@@ -59,13 +59,17 @@ class TranslateController: UIViewController {
     @IBAction func getTranslation() {
         guard let source = sourceLanguage.titleLabel?.text else { return }
         guard let text = textToTranslate.text else { return }
+        
         if text == "" {
             showAlert(title: "Oops", message: "You need to enter at least one word")
         }
-        guard let target = targetLanguage.titleLabel?.text else { return }
         
-        TranslateAPI().getTranslation(textToTranslate: text, sourceLanguage: source, targetLanguage: target) { (translate, success) in
+        guard let target = targetLanguage.titleLabel?.text else { return }
+        guard let request = TranslateAPI().createTranslateRequest(textToTranslate: text, sourceLanguage: source, targetLanguage: target) else { return }
+        
+        RequestManager().launch(request: request, api: .google) { (data, success) in
             if success {
+                guard let translate = data as! Translate? else { return }
                 self.translation = translate
                 self.translatedText.text = self.translation?.data.translations[0].translatedText
             } else {

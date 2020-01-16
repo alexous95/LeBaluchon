@@ -18,17 +18,23 @@ enum APIManager {
 
 class RequestManager {
     
-    var request: URLRequest?
-    
     // We create variables for the session and datatask to conform the dependance injection pattern for our test
     private var task: URLSessionDataTask?
+
+    // For testing purpose
     private var session = URLSession(configuration: .default)
-    
     convenience init(session: URLSession) {
         self.init()
         self.session = session
     }
     
+    /// Request for json file from the API passed as a parameter
+    ///
+    /// - Parameter request: A URLRequest that will be used with our session
+    /// - Parameter api: The api we want to use to handle the result from the request
+    /// - parameter completionHandler: A closure with the type ( (Any?, Bool) -> Void) ) used to pass data to the controller
+    ///
+    /// - This methode takes a closure as parameter to save and transmit an object of type Any? and a boolean that indicate whether the query operation was successful or not to the controller
     func launch(request: URLRequest, api: APIManager, completionHandler: @escaping ((Any?, Bool) -> Void)) {
         
         task?.cancel()

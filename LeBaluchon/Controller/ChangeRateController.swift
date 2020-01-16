@@ -20,6 +20,7 @@ class ChangeRateController: UIViewController {
     // MARK: - Variables
     
     var exchangeRates: Exchange?
+    let request = ExchangeAPI().createExchangeRequest()
     let gradient = CAGradientLayer()
 
     // MARK: - View Life cycle
@@ -51,8 +52,9 @@ class ChangeRateController: UIViewController {
         updateInterface(isHidden: convertButton.isHidden)
         activityWheel.startAnimating()
         
-        ExchangeAPI().getExchange { (exchange, success) in
+        RequestManager().launch(request: request, api: .fixer) { (data, success) in
             if success {
+                guard let exchange = data as! Exchange? else { return }
                 self.exchangeRates = exchange
                 self.tableView.reloadData()
                 self.updateInterface(isHidden: self.convertButton.isHidden)
@@ -82,8 +84,9 @@ class ChangeRateController: UIViewController {
     
     /// Get the change rate for one Euro
     private func getRatesForOne() {
-        ExchangeAPI().getExchange { (exchange, success) in
+        RequestManager().launch(request: request, api: .fixer) { (data, success) in
             if success {
+                guard let exchange = data as! Exchange? else { return }
                 self.exchangeRates = exchange
                 self.tableView.reloadData()
             } else {

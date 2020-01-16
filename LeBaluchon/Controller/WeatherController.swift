@@ -110,8 +110,11 @@ class WeatherController: UIViewController {
     
     /// Request the weather for New-York
     private func getWeather() {
-        OpenWeatherAPI().getNYWeather { (weather, success) in
+        let request = OpenWeatherAPI().createNYWeatherRequest()
+        
+        RequestManager().launch(request: request, api: .openWeather) { (data, success) in
             if success {
+                guard let weather = data as! OpenWeather? else { return }
                 self.weatherNY = weather
                 self.updateUI()
             } else {
@@ -123,8 +126,11 @@ class WeatherController: UIViewController {
     /// Requests the weather for the current location
     private func getCurrentWeather() {
         guard let lon = lon, let lat = lat else { return }
-        OpenWeatherAPI().getCurrentWeather(lon: lon, lat: lat) { (currentWeather, success) in
+        let request = OpenWeatherAPI().createCurrentWeatherRequest(lon: lon, lat: lat)
+        
+        RequestManager().launch(request: request, api: .openWeather) { (data, success) in
             if success {
+                guard let currentWeather = data as! OpenWeather? else { return }
                 self.weatherCurrent = currentWeather
                 self.updateUI()
             } else {
@@ -247,9 +253,11 @@ class WeatherController: UIViewController {
     /// To use this function you must have fetch the weather data
     /// - Parameter identifier: The identifier used by the api to recognize the icon
     private func getNYIcon(identifier: String) {
-        OpenWeatherAPI().getWeatherIcon(identifier: identifier) { (data, success) in
+        let request = OpenWeatherAPI().createIconRequest(with: identifier)
+        
+        RequestManager().launch(request: request, api: .image) { (data, success) in
             if success {
-                guard let data = data else {
+                guard let data = data as! Data? else {
                     return
                 }
                 self.skyImageNY.image = UIImage(data: data)
@@ -263,14 +271,26 @@ class WeatherController: UIViewController {
     /// To use this function you must have fetch the weather data
     /// - Parameter identifier: The identifier used by the api to recognize the icon
     private func getCurrentIcon(identifier: String) {
-        OpenWeatherAPI().getWeatherIcon(identifier: identifier) { (data, success) in
+        let request = OpenWeatherAPI().createIconRequest(with: identifier)
+        
+        RequestManager().launch(request: request, api: .image) { (data, success) in
+            if success {
+                guard let data = data as! Data? else {
+                    return
+                }
+                self.skyImageCurrent.image = UIImage(data: data)
+            } else {
+                print("On a pas l'image")
+            }
+        }
+        /*OpenWeatherAPI().getWeatherIcon(identifier: identifier) { (data, success) in
             if success {
                 guard let data = data else { return }
                 self.skyImageCurrent.image = UIImage(data: data)
             } else {
                 print("On a pas d'image")
             }
-        }
+        }*/
     }
 }
 

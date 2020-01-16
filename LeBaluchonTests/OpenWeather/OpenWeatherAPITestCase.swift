@@ -15,11 +15,17 @@ class OpenWeatherAPITestCase: XCTestCase {
     var lon: Double!
     var lat: Double!
     var identifier: String!
+    var requestNy: URLRequest!
+    var requestCurrent: URLRequest!
+    var requestIcon: URLRequest!
     
     override func setUp() {
         lon = 2.2369
         lat = 48.8842
         identifier = "10n"
+        requestNy = OpenWeatherAPI().createNYWeatherRequest()
+        requestCurrent = OpenWeatherAPI().createCurrentWeatherRequest(lon: lon, lat: lat)
+        requestIcon = OpenWeatherAPI().createIconRequest(with: identifier)
     }
 
     // MARK: - New-York Weather Test
@@ -27,18 +33,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is an error in GetNYWeather
     func testGivenNilWeather_WhenGettingNYWeather_ThenFailCallbackIfError() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error) )
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getNYWeather { (weather, success) in
+        weather.launch(request: requestNy, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -48,18 +51,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is no data in getNYWeather
     func testGivenNilWeather_WhenGettingNYWeather_ThenFailCallbackIfNoData() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getNYWeather { (weather, success) in
+        weather.launch(request: requestNy, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -69,18 +69,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is an incorrect incorrect urlResponse and correct data in getNYWeather
     func testGivenNilWeather_WhenGettingNYWeather_ThenFailCallbackIfIncorrectUrlResponse() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getNYWeather { (weather, success) in
+        weather.launch(request: requestNy, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -90,18 +87,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is no error and we received the data in getNYWeather
     func testGivenNilWeather_WhenGettingWeather_ThenSuccessCallbackIfCorrectDataAndNoError() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getNYWeather { (weather, success) in
+        weather.launch(request: requestNy, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNotNil(data)
             XCTAssertTrue(success)
-            XCTAssertNotNil(weather)
             expectation.fulfill()
         }
         
@@ -111,18 +105,16 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case when there is no error, we received the data and we compare to what we expect in getNYWeather
     func testGivenNilWeather_WhenGettingNYWeather_ThenDataEqualsWeatherDataJson() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherNYCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getNYWeather { (weather, success) in
+        weather.launch(request: requestNy, api: .openWeather) { (data, success) in
             
             // Then
             XCTAssertTrue(success)
-            XCTAssertNotNil(weather)
+            XCTAssertNotNil(data)
+            let weatherData = data as! OpenWeather?
             
             let coord = Coord(lon: -75.5, lat: 43)
             var weatherNY = [Weather]()
@@ -142,46 +134,46 @@ class OpenWeatherAPITestCase: XCTestCase {
             let name = "New York"
             let cod = 200
             
-            XCTAssertEqual(coord.lat, weather!.coord.lat)
-            XCTAssertEqual(coord.lon, weather!.coord.lon)
+            XCTAssertEqual(coord.lat, weatherData!.coord.lat)
+            XCTAssertEqual(coord.lon, weatherData!.coord.lon)
             
-            XCTAssertEqual(weatherNY[0].id, weather!.weather[0].id)
-            XCTAssertEqual(weatherNY[0].main, weather!.weather[0].main)
-            XCTAssertEqual(weatherNY[0].weatherDescription, weather!.weather[0].weatherDescription)
-            XCTAssertEqual(weatherNY[0].icon, weather!.weather[0].icon)
+            XCTAssertEqual(weatherNY[0].id, weatherData!.weather[0].id)
+            XCTAssertEqual(weatherNY[0].main, weatherData!.weather[0].main)
+            XCTAssertEqual(weatherNY[0].weatherDescription, weatherData!.weather[0].weatherDescription)
+            XCTAssertEqual(weatherNY[0].icon, weatherData!.weather[0].icon)
             
-            XCTAssertEqual(base, weather!.base)
+            XCTAssertEqual(base, weatherData!.base)
             
-            XCTAssertEqual(main.temp, weather!.main.temp)
-            XCTAssertEqual(main.feelsLike, weather!.main.feelsLike)
-            XCTAssertEqual(main.tempMin, weather!.main.tempMin)
-            XCTAssertEqual(main.tempMax, weather!.main.tempMax)
+            XCTAssertEqual(main.temp, weatherData!.main.temp)
+            XCTAssertEqual(main.feelsLike, weatherData!.main.feelsLike)
+            XCTAssertEqual(main.tempMin, weatherData!.main.tempMin)
+            XCTAssertEqual(main.tempMax, weatherData!.main.tempMax)
             
-            XCTAssertEqual(visibility, weather!.visibility)
+            XCTAssertEqual(visibility, weatherData!.visibility)
             
-            XCTAssertEqual(wind.speed, weather!.wind.speed)
-            XCTAssertEqual(wind.deg, weather!.wind.deg)
+            XCTAssertEqual(wind.speed, weatherData!.wind.speed)
+            XCTAssertEqual(wind.deg, weatherData!.wind.deg)
             
-            XCTAssertEqual(snow.the1H, weather!.snow!.the1H)
-            XCTAssertEqual(snow.the3H, weather!.snow!.the3H)
+            XCTAssertEqual(snow.the1H, weatherData!.snow!.the1H)
+            XCTAssertEqual(snow.the3H, weatherData!.snow!.the3H)
             
-            XCTAssertEqual(clouds.all, weather!.clouds!.all)
+            XCTAssertEqual(clouds.all, weatherData!.clouds!.all)
             
-            XCTAssertEqual(dt, weather!.dt)
+            XCTAssertEqual(dt, weatherData!.dt)
             
-            XCTAssertEqual(sys.type, weather!.sys.type)
-            XCTAssertEqual(sys.id, weather!.sys.id)
-            XCTAssertEqual(sys.message, weather!.sys.message)
-            XCTAssertEqual(sys.country, weather!.sys.country)
-            XCTAssertEqual(sys.sunrise, weather!.sys.sunrise)
-            XCTAssertEqual(sys.sunset, weather!.sys.sunset)
+            XCTAssertEqual(sys.type, weatherData!.sys.type)
+            XCTAssertEqual(sys.id, weatherData!.sys.id)
+            XCTAssertEqual(sys.message, weatherData!.sys.message)
+            XCTAssertEqual(sys.country, weatherData!.sys.country)
+            XCTAssertEqual(sys.sunrise, weatherData!.sys.sunrise)
+            XCTAssertEqual(sys.sunset, weatherData!.sys.sunset)
             
-            XCTAssertEqual(timezone, weather!.timezone)
-            XCTAssertEqual(id, weather!.id)
+            XCTAssertEqual(timezone, weatherData!.timezone)
+            XCTAssertEqual(id, weatherData!.id)
             
-            XCTAssertEqual(name, weather!.name)
+            XCTAssertEqual(name, weatherData!.name)
             
-            XCTAssertEqual(cod, weather!.cod)
+            XCTAssertEqual(cod, weatherData!.cod)
         
             expectation.fulfill()
         }
@@ -194,18 +186,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is an error in GetCurrentWeather
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenFailCallbackIfError() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getCurrentWeather(lon: self.lon, lat: self.lat) { (weather, success) in
+        weather.launch(request: requestCurrent, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -215,18 +204,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is no data in getCurretnWeather
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenFailCallbackIfNoData() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getCurrentWeather(lon: self.lon, lat: self.lat) { (weather, success) in
+        weather.launch(request: requestCurrent, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -236,18 +222,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is an incorrect incorrect urlResponse and correct data in getCurrentWeather
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenFailCallbackIfIncorrectUrlResponse() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getCurrentWeather(lon: self.lon, lat: self.lat) { (weather, success) in
+        weather.launch(request: requestCurrent, api: .openWeather) { (data, success) in
             
             // Then
+            XCTAssertNil(data)
             XCTAssertFalse(success)
-            XCTAssertNil(weather)
             expectation.fulfill()
         }
         
@@ -257,18 +240,15 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is no error and we received the data in getCurrentWeather
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenSuccessCallbackIfCorrectDataAndNoError() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getCurrentWeather(lon: self.lon, lat: self.lat) { (weather, success) in
+        weather.launch(request: requestCurrent, api: .openWeather) { (data, success) in
             
             // Then
             XCTAssertTrue(success)
-            XCTAssertNotNil(weather)
+            XCTAssertNotNil(data)
             expectation.fulfill()
         }
         
@@ -278,18 +258,16 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case when there is no error, we received the data and we compare to what we expect in getCurrentWeather
     func testGivenNilWeather_WhenGettingCurrentWeather_ThenDataEqualsWeatherDataJson() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let weather = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getCurrentWeather(lon: self.lon, lat: self.lat) { (weather, success) in
+        weather.launch(request: requestCurrent, api: .openWeather) { (data, success) in
             
             // Then
             XCTAssertTrue(success)
-            XCTAssertNotNil(weather)
+            XCTAssertNotNil(data)
+            let weatherData = data as! OpenWeather?
             
             let coord = Coord(lon: 2.24, lat: 48.88)
             var weatherCurrent = [Weather]()
@@ -308,43 +286,43 @@ class OpenWeatherAPITestCase: XCTestCase {
             let name = "Puteaux"
             let cod = 200
             
-            XCTAssertEqual(coord.lat, weather!.coord.lat)
-            XCTAssertEqual(coord.lon, weather!.coord.lon)
+            XCTAssertEqual(coord.lat, weatherData!.coord.lat)
+            XCTAssertEqual(coord.lon, weatherData!.coord.lon)
             
-            XCTAssertEqual(weatherCurrent[0].id, weather!.weather[0].id)
-            XCTAssertEqual(weatherCurrent[0].main, weather!.weather[0].main)
-            XCTAssertEqual(weatherCurrent[0].weatherDescription, weather!.weather[0].weatherDescription)
-            XCTAssertEqual(weatherCurrent[0].icon, weather!.weather[0].icon)
+            XCTAssertEqual(weatherCurrent[0].id, weatherData!.weather[0].id)
+            XCTAssertEqual(weatherCurrent[0].main, weatherData!.weather[0].main)
+            XCTAssertEqual(weatherCurrent[0].weatherDescription, weatherData!.weather[0].weatherDescription)
+            XCTAssertEqual(weatherCurrent[0].icon, weatherData!.weather[0].icon)
             
-            XCTAssertEqual(base, weather!.base)
+            XCTAssertEqual(base, weatherData!.base)
             
-            XCTAssertEqual(main.temp, weather!.main.temp)
-            XCTAssertEqual(main.feelsLike, weather!.main.feelsLike)
-            XCTAssertEqual(main.tempMin, weather!.main.tempMin)
-            XCTAssertEqual(main.tempMax, weather!.main.tempMax)
+            XCTAssertEqual(main.temp, weatherData!.main.temp)
+            XCTAssertEqual(main.feelsLike, weatherData!.main.feelsLike)
+            XCTAssertEqual(main.tempMin, weatherData!.main.tempMin)
+            XCTAssertEqual(main.tempMax, weatherData!.main.tempMax)
             
-            XCTAssertEqual(visibility, weather!.visibility)
+            XCTAssertEqual(visibility, weatherData!.visibility)
             
-            XCTAssertEqual(wind.speed, weather!.wind.speed)
-            XCTAssertEqual(wind.deg, weather!.wind.deg)
+            XCTAssertEqual(wind.speed, weatherData!.wind.speed)
+            XCTAssertEqual(wind.deg, weatherData!.wind.deg)
             
-            XCTAssertEqual(clouds.all, weather!.clouds!.all)
+            XCTAssertEqual(clouds.all, weatherData!.clouds!.all)
             
-            XCTAssertEqual(dt, weather!.dt)
+            XCTAssertEqual(dt, weatherData!.dt)
             
-            XCTAssertEqual(sys.type, weather!.sys.type)
-            XCTAssertEqual(sys.id, weather!.sys.id)
-            XCTAssertEqual(sys.message, weather!.sys.message)
-            XCTAssertEqual(sys.country, weather!.sys.country)
-            XCTAssertEqual(sys.sunrise, weather!.sys.sunrise)
-            XCTAssertEqual(sys.sunset, weather!.sys.sunset)
+            XCTAssertEqual(sys.type, weatherData!.sys.type)
+            XCTAssertEqual(sys.id, weatherData!.sys.id)
+            XCTAssertEqual(sys.message, weatherData!.sys.message)
+            XCTAssertEqual(sys.country, weatherData!.sys.country)
+            XCTAssertEqual(sys.sunrise, weatherData!.sys.sunrise)
+            XCTAssertEqual(sys.sunset, weatherData!.sys.sunset)
             
-            XCTAssertEqual(timezone, weather!.timezone)
-            XCTAssertEqual(id, weather!.id)
+            XCTAssertEqual(timezone, weatherData!.timezone)
+            XCTAssertEqual(id, weatherData!.id)
             
-            XCTAssertEqual(name, weather!.name)
+            XCTAssertEqual(name, weatherData!.name)
             
-            XCTAssertEqual(cod, weather!.cod)
+            XCTAssertEqual(cod, weatherData!.cod)
             
             expectation.fulfill()
         }
@@ -357,14 +335,11 @@ class OpenWeatherAPITestCase: XCTestCase {
      /// Test case where there is an error in GetWeatherIcon
     func testGivenNilIcon_WhenGettingIcon_ThenFailCallbackIfError() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error))
+        let image = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: FakeResponseWeather.error))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getWeatherIcon(identifier: self.identifier) { (data, success) in
+        image.launch(request: requestIcon, api: .image) { (data, success) in
             
             // Then
             XCTAssertFalse(success)
@@ -378,14 +353,11 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is no data in getWeatherIcon
     func testGivenNilIcon_WhenGettingIcon_ThenFailCallbackIfNoData() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
+        let image = RequestManager(session: URLSessionFake(data: nil, urlResponse: nil, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getWeatherIcon(identifier: self.identifier) { (data, success) in
+        image.launch(request: requestIcon, api: .image) { (data, success) in
             
             // Then
             XCTAssertFalse(success)
@@ -399,14 +371,11 @@ class OpenWeatherAPITestCase: XCTestCase {
     /// Test case where there is an incorrect incorrect urlResponse and correct data in getWeatherIcon
     func testGivenNilIcon_WhenGettingIcon_ThenFailCallbackIfIncorrectUrlResponse() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil))
+        let image = RequestManager(session: URLSessionFake(data: FakeResponseWeather.weatherCurrentCorrectData, urlResponse: FakeResponseWeather.responseKO, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getWeatherIcon(identifier: self.identifier) { (data, success) in
+        image.launch(request: requestIcon, api: .image) { (data, success) in
             
             // Then
             XCTAssertFalse(success)
@@ -420,19 +389,17 @@ class OpenWeatherAPITestCase: XCTestCase {
     
     func testGivenNilIcon_WhenGettingIcon_ThenDataEqualsImg() {
         // Given
-        let weather = OpenWeatherAPI(
-            currentWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            nyWeatherSession: URLSessionFake(data: nil, urlResponse: nil, responseError: nil),
-            iconSession: URLSessionFake(data: FakeResponseWeather.imgData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
+        let image = RequestManager(session: URLSessionFake(data: FakeResponseWeather.imgData, urlResponse: FakeResponseWeather.responseOK, responseError: nil))
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        weather.getWeatherIcon(identifier: self.identifier) { (data, success) in
+        image.launch(request: requestIcon, api: .image) { (data, success) in
             
             // Then
             XCTAssertTrue(success)
-            XCTAssertNotNil(weather)
+            XCTAssertNotNil(data)
             
+            let data = data as! Data?
             let dataFake = "10n".data(using: .utf8)!
             
             XCTAssertEqual(dataFake, data)
