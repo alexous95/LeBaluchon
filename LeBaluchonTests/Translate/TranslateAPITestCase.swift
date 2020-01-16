@@ -15,12 +15,14 @@ class TranslateAPITestCase: XCTestCase {
     var source: String!
     var target: String!
     var requestTranslate: URLRequest!
+    var requestLanguage: URLRequest!
     
     override func setUp() {
         text = "Hello, world"
         source = "en"
         target = "fr"
         requestTranslate = TranslateAPI().createTranslateRequest(textToTranslate: text, sourceLanguage: source, targetLanguage: target)
+        requestLanguage = TranslateAPI().createLanguageRequest()
     }
 
     // MARK: - Test GetTranslation
@@ -118,7 +120,7 @@ class TranslateAPITestCase: XCTestCase {
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.launch(request: requestTranslate, api: .language) { (data, success) in
+        language.launch(request: requestLanguage, api: .language) { (data, success) in
             // Then
             XCTAssertNil(data)
             XCTAssertFalse(success)
@@ -136,7 +138,7 @@ class TranslateAPITestCase: XCTestCase {
     
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.launch(request: requestTranslate, api: .language) { (data, success) in
+        language.launch(request: requestLanguage, api: .language) { (data, success) in
             // Then
             XCTAssertNil(data)
             XCTAssertFalse(success)
@@ -153,7 +155,7 @@ class TranslateAPITestCase: XCTestCase {
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.launch(request: requestTranslate, api: .language) { (data, success) in
+        language.launch(request: requestLanguage, api: .language) { (data, success) in
             // Then
             XCTAssertNil(data)
             XCTAssertFalse(success)
@@ -170,7 +172,7 @@ class TranslateAPITestCase: XCTestCase {
         
         // When
         let expectation = XCTestExpectation(description: "Waiting for queue change")
-        language.launch(request: requestTranslate, api: .language) { (data, success) in
+        language.launch(request: requestLanguage, api: .language) { (data, success) in
             // Then
             XCTAssertNotNil(data)
             XCTAssertTrue(success)
