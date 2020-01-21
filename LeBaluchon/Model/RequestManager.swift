@@ -36,16 +36,13 @@ class RequestManager {
     ///
     /// - This methode takes a closure as parameter to save and transmit an object of type Any? and a boolean that indicate whether the query operation was successful or not to the controller
     func launch(request: URLRequest, api: APIManager, completionHandler: @escaping ((Any?, Bool) -> Void)) {
-        
         task?.cancel()
         task = session.dataTask(with: request) { (data, response, error) in
-            // We use here dispatchQueue.main.async to be sure to go back to the main queue because the user interaction is handled only in the main queue
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     completionHandler(nil, false)
                     return
                 }
-                
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     completionHandler(nil, false)
                     return
@@ -55,11 +52,10 @@ class RequestManager {
                     let decoder = JSONDecoder()
                     
                     switch api {
-                    
                     case .google:
                         let decoded = try decoder.decode(Translate.self, from: data)
                         completionHandler(decoded, true)
-                        
+
                     case .openWeather:
                         decoder.dateDecodingStrategy = .secondsSince1970
                         
@@ -81,9 +77,7 @@ class RequestManager {
                     case .image:
                         completionHandler(data, true)
                     }
-                    
                 } catch {
-                    debugPrint("failed to decode")
                     completionHandler(nil, false)
                 }
             }
