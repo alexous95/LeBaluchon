@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="llg-Cg-E7D">
                                 <rect key="frame" x="0.0" y="197" width="375" height="532"/>
@@ -114,6 +114,7 @@
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="llg-Cg-E7D" firstAttribute="trailing" secondItem="hml-k1-Yyn" secondAttribute="trailing" id="1LG-ZF-KgW"/>
                             <constraint firstItem="JDO-mQ-sqB" firstAttribute="leading" secondItem="3XJ-mF-r95" secondAttribute="trailing" constant="15" id="2LH-iX-jqF"/>
@@ -133,6 +134,9 @@
                             <constraint firstItem="Adk-dc-zc8" firstAttribute="leading" secondItem="3XJ-mF-r95" secondAttribute="trailing" constant="50" id="zrA-ce-Ep5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hml-k1-Yyn"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="fYO-UD-YB4" appends="YES" id="Kg4-1Z-1su"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Exchange" image="icons8-échange-euro-50" id="3s5-5m-RNj"/>
                     <connections>
@@ -143,6 +147,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOx-Jn-Rc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fYO-UD-YB4">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="tje-Ao-AgT" id="7tQ-51-x7R"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="-1381.0344827586207"/>
         </scene>
@@ -559,6 +568,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6b7-7P-KaS" firstAttribute="bottom" secondItem="EoG-VR-IBY" secondAttribute="bottom" constant="5" id="Lt0-JI-aOK"/>
                             <constraint firstItem="EoG-VR-IBY" firstAttribute="leading" secondItem="6b7-7P-KaS" secondAttribute="leading" id="dBz-xX-a9r"/>
@@ -566,6 +576,9 @@
                             <constraint firstItem="EoG-VR-IBY" firstAttribute="top" secondItem="6b7-7P-KaS" secondAttribute="top" constant="5" id="spx-Xp-pM3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6b7-7P-KaS"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="LR5-d6-Jfl" appends="YES" id="ZE4-MP-1E3"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translate" image="Language" id="bN3-0C-2WW"/>
                     <connections>
@@ -578,6 +591,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r7-oo-yt2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="LR5-d6-Jfl">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="VMQ-BP-CKp" id="jF9-tM-ZOp"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="-356.1576354679803"/>
         </scene>

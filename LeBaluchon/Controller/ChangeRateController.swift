@@ -67,6 +67,10 @@ class ChangeRateController: UIViewController {
         }
     }
     
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        amountTF.resignFirstResponder()
+    }
+    
     // MARK: - Private methodes
     
     /// Get the amount choosen by the user
@@ -107,7 +111,6 @@ class ChangeRateController: UIViewController {
     private func setupDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
-        amountTF.delegate = self
     }
     
     /// Setsup the UI elements
@@ -158,13 +161,6 @@ class ChangeRateController: UIViewController {
 }
 
 // MARK: - Extension
-
-extension ChangeRateController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
-}
 
 extension ChangeRateController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {

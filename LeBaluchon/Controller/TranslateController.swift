@@ -57,6 +57,9 @@ class TranslateController: UIViewController {
     
     /// This function is used to query a translation from the input text
     @IBAction func getTranslation() {
+        if textToTranslate.isFirstResponder {
+            textToTranslate.resignFirstResponder()
+        }
         guard let source = sourceLanguage.titleLabel?.text else { return }
         guard let text = textToTranslate.text else { return }
         
@@ -85,6 +88,10 @@ class TranslateController: UIViewController {
         source = target
         target = tmp
         updateButton(newSource: source, newTarget: target)
+    }
+    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        textToTranslate.resignFirstResponder()
     }
     
     // MARK: - Private
