@@ -1,5 +1,7 @@
 # LeBaluchon
 
+<img src="https://github.com/alexous95/LeBaluchon/blob/master/Currency_Converter.png"/>
+
 This app contains 3 parts. The first one is to get the currency conversion.
 The second one is to translate from and to other languages.
 And the third one is to get the weather.
