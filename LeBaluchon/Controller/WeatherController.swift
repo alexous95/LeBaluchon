@@ -283,14 +283,6 @@ class WeatherController: UIViewController {
                 print("On a pas l'image")
             }
         }
-        /*OpenWeatherAPI().getWeatherIcon(identifier: identifier) { (data, success) in
-            if success {
-                guard let data = data else { return }
-                self.skyImageCurrent.image = UIImage(data: data)
-            } else {
-                print("On a pas d'image")
-            }
-        }*/
     }
 }
 

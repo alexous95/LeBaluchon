@@ -42,6 +42,7 @@
 		FAD1F2ED23CF1DB700312969 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1F2EC23CF1DB700312969 /* RequestManager.swift */; };
 		FAE0109F23B8CB440055D8D8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0109E23B8CB440055D8D8 /* Extension.swift */; };
 		FAE9FEC123A8DD8900F7F76E /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9FEC023A8DD8900F7F76E /* Exchange.swift */; };
+		FAF3020A2417E7D300F07881 /* ChangeRateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF302092417E7D300F07881 /* ChangeRateViewModel.swift */; };
 		FAF8AF3B23BE139D00D7B113 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF8AF3A23BE139D00D7B113 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		FAD1F2EC23CF1DB700312969 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		FAE0109E23B8CB440055D8D8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FAE9FEC023A8DD8900F7F76E /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
+		FAF302092417E7D300F07881 /* ChangeRateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeRateViewModel.swift; sourceTree = "<group>"; };
 		FAF8AF3A23BE139D00D7B113 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,6 +197,7 @@
 		FAB1B79A239C191D00243B7E /* LeBaluchon */ = {
 			isa = PBXGroup;
 			children = (
+				FAF302082417E7B300F07881 /* View Model */,
 				FAB1B7C3239C19DD00243B7E /* Supporting Files */,
 				FACADA0423BA2B94008C002B /* Networking */,
 				FAB1B7C2239C19D500243B7E /* Model */,
@@ -271,6 +274,14 @@
 				FACADA0523BA2C24008C002B /* WeatherService.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		FAF302082417E7B300F07881 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAF302092417E7D300F07881 /* ChangeRateViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 		FAF8AF3C23BF9C6F00D7B113 /* Translate */ = {
@@ -407,6 +418,7 @@
 				FA5A15CC23B6373200373B63 /* OpenWeatherAPI.swift in Sources */,
 				FAE0109F23B8CB440055D8D8 /* Extension.swift in Sources */,
 				FA0B899D23C331F300417D1B /* Translate.swift in Sources */,
+				FAF3020A2417E7D300F07881 /* ChangeRateViewModel.swift in Sources */,
 				FAE9FEC123A8DD8900F7F76E /* Exchange.swift in Sources */,
 				FA5A15C023B6045F00373B63 /* ExchangeTableViewCell.swift in Sources */,
 				FA57D9CB23AA1B2600D54A11 /* WebUtilities.swift in Sources */,
