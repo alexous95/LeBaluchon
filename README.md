@@ -1,6 +1,6 @@
 # LeBaluchon
 
-<img src="https://github.com/alexous95/LeBaluchon/blob/master/Currency.png"/> | <img src="https://github.com/alexous95/LeBaluchon/blob/master/Translate.png"/> | <img src="https://github.com/alexous95/LeBaluchon/blob/master/Weather.png"/>
+<img src="https://github.com/alexous95/LeBaluchon/blob/master/Currency.png"/> | <img src="https://github.com/alexous95/LeBaluchon/blob/master/Translate.png"/> | <img src="https://github.com/alexous95/LeBaluchon/blob/master/Weather.png"/> |
 
 This app contains 3 parts. The first one is to get the currency conversion.
 The second one is to translate from and to other languages.
